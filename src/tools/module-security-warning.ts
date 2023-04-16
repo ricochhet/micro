@@ -1,7 +1,6 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
 
-import UnsafeOpError from '../errors/UnsafeOpError';
 import Logger from '../logger/Logger';
 import { LogType } from '../logger/enums/LogType';
 

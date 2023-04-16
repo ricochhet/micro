@@ -1,16 +1,8 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
-
-import * as Errors from './errors/errors.mod';
-import * as Logger from './logger/Logger';
-import * as Providers from './providers/providers.mod';
-import * as Resolvers from './resolvers/resolvers.mod';
-import * as Tester from './tester/tester.mod';
-import * as Tools from './tools/tools.mod';
-import * as Utils from './utils/utils.mod';
-import * as Web from './web/web.mod';
-export { Errors, Logger, Providers, Resolvers, Tester, Tools, Utils, Web };
-
+import BuildSystem from './buildsystem/buildsystem.wrapper';
+import Server from './server/server.mod';
+export { BuildSystem, Server };
 // MIT License
 // This file is a part of github.com/ricochhet/micro
 // Copyright (c) 2023 Jon

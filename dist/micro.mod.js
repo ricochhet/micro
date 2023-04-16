@@ -1,12 +1,14 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
-import Tester from './tester/Tester';
-import Logger from './logger/Logger';
-import FsProvider from './providers/generic/FsProvider';
-import BuildSystem from './web/buildsystem/buildsystem.wrapper';
-import Command from './utils/Command';
-import { check_file_copyrights } from './tools/check-file-copyrights';
-export { Tester, Logger, FsProvider, BuildSystem, Command, check_file_copyrights };
+import * as Errors from './errors/errors.mod';
+import * as Logger from './logger/Logger';
+import * as Providers from './providers/providers.mod';
+import * as Resolvers from './resolvers/resolvers.mod';
+import * as Tester from './tester/tester.mod';
+import * as Tools from './tools/tools.mod';
+import * as Utils from './utils/utils.mod';
+import * as Web from './web/web.mod';
+export { Errors, Logger, Providers, Resolvers, Tester, Tools, Utils, Web };
 // MIT License
 // This file is a part of github.com/ricochhet/micro
 // Copyright (c) 2023 Jon
