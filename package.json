@@ -6,7 +6,7 @@
     "scripts": {
         "prettier": "prettier --config .prettierrc --write .",
         "prettier:check": "prettier --config .prettierrc --check .",
-        "test": "ts-node ./src/tests.ts"
+        "test": "ts-node ./__tests__/tests.ts"
     },
     "author": "ricochhet",
     "license": "MIT",

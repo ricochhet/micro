@@ -1,5 +1,5 @@
-import Tester from './Tester';
-import { StatusType } from './enum/StatusType';
+import Tester from '../src/tester/Tester';
+import { StatusType } from '../src/tester/enum/StatusType';
 
 Tester.assert('expect (100 === 200) should equal FAILURE', expect => {
     expect(expect(100, true).toEqualValueAndType(200)).toEqualValueAndType(StatusType.FAILURE);
