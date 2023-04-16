@@ -1,0 +1,26 @@
+import { LogType } from './LogType';
+import { FgRed, FgWhite, FgYellow, FgGray, FgGreen, FgBlue } from '../utils/ConsoleColors';
+export class LogTypeHelper {
+    static Color(type) {
+        switch (type) {
+            case LogType.DEBUG:
+                return FgGray;
+            case LogType.INFO:
+                return FgWhite;
+            case LogType.WARN:
+                return FgYellow;
+            case LogType.NATIVE:
+                return FgGray;
+            case LogType.ERROR:
+                return FgRed;
+            case LogType.SUCCESS:
+                return FgGreen;
+            case LogType.BENCHMARK:
+                return FgGray;
+            case LogType.NOTICE:
+                return FgBlue;
+            default:
+                throw new Error();
+        }
+    }
+}
