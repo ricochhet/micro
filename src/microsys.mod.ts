@@ -48,6 +48,8 @@ import * as microsys_fsprovider_ts from './providers/generic/FsProvider';
 export { microsys_fsprovider_ts };
 import * as microsys_fsproviderutils_ts from './providers/generic/FsProviderUtils';
 export { microsys_fsproviderutils_ts };
+import * as microsys_enumresolver_ts from './resolvers/EnumResolver';
+export { microsys_enumresolver_ts };
 import * as microsys_statustype_ts from './tester/enum/StatusType';
 export { microsys_statustype_ts };
 import * as microsys_iexpect_ts from './tester/interfaces/IExpect';
