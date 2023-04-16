@@ -1,10 +1,9 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
 
-// TODO - add micro.cli
-import { Command } from './micro.mod';
-Command.do(['--hello-world'], () => {
-    console.log('hello, world');
+import { Command, check_file_copyrights } from './micro.mod';
+Command.do(['--check-file-copyrights'], (params: string[]) => {
+    check_file_copyrights(params[1], params[2].split(','), params[3]);
 });
 
 // MIT License
