@@ -23,17 +23,17 @@ export default class Tester {
     public static expect<T>(actual: T, suppress?: boolean, description?: string): IExpect<T> {
         const success = (expected: T): string => {
             if (suppress) return StatusType.SUCCESS;
-            Logger.Log(LogType.SUCCESS, `PASS: ${description}`);
-            Logger.Log(LogType.DEBUG, `PASS: ${actual} equals ${expected}`);
             this._passes++;
+            Logger.Log(LogType.SUCCESS, `PASS (${this._passes}): ${description}`);
+            Logger.Log(LogType.DEBUG, `----PASS: ${actual} equals ${expected}`);
             return StatusType.SUCCESS;
         };
 
         const failure = (expected: T): string => {
             if (suppress) return StatusType.FAILURE;
-            Logger.Log(LogType.ERROR, `FAIL: ${description}`);
-            Logger.Log(LogType.ERROR, `FAIL: ${actual} does not equal ${expected}`);
             this._failures++;
+            Logger.Log(LogType.ERROR, `FAIL (${this._failures}): ${description}`);
+            Logger.Log(LogType.ERROR, `----FAIL: ${actual} does not equal ${expected}`);
             return StatusType.FAILURE;
         };
 
@@ -78,6 +78,10 @@ export default class Tester {
                 return failure(expected);
             },
             toEqualFunction(expected: T): string {
+                if (typeof actual !== 'function') {
+                    return failure(expected);
+                }
+
                 if ((actual as any)() === expected) {
                     return success(expected);
                 }
