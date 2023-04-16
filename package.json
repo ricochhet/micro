@@ -2,7 +2,7 @@
     "name": "micro",
     "version": "1.0.0",
     "description": "small zero-dependency tools, frameworks and libraries that I used for personal projects.",
-    "main": "",
+    "main": "./dist/micro.mod.js",
     "scripts": {
         "checks": "ts-node ./src/micro.checks.ts && echo [micro-npm] done",
         "build": "tsc ./src/micro.mod.ts ./src/micro.checks.ts ./src/microsys.mod.ts --outDir dist --target es2022 && echo [micro-npm] done",
