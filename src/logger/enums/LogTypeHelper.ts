@@ -15,11 +15,11 @@ export abstract class LogTypeHelper {
             case LogType.ERROR:
                 return FgRed;
             case LogType.SUCCESS:
-                return FgGreen
+                return FgGreen;
             case LogType.BENCHMARK:
                 return FgGray;
             case LogType.NOTICE:
-                return FgBlue
+                return FgBlue;
             default:
                 throw new Error();
         }

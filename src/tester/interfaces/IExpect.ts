@@ -5,4 +5,4 @@ export interface IExpect<T> {
     toEqualValueAsObject(expected: T): string;
     toEqualType(expected: T): string;
     toEqualFunction(expected: T): string;
-}      
+}

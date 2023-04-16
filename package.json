@@ -1,16 +1,19 @@
 {
-  "name": "micro",
-  "version": "1.0.0",
-  "description": "small zero-dependency tools, frameworks and libraries that I used for personal projects.",
-  "main": "",
-  "scripts": {
-    "test": "ts-node ./src/tests.ts"
-  },
-  "author": "ricochhet",
-  "license": "MIT",
-  "devDependencies": {
-    "@types/node": "^18.15.11",
-    "ts-node": "^10.9.1",
-    "typescript": "^5.0.4"
-  }
+    "name": "micro",
+    "version": "1.0.0",
+    "description": "small zero-dependency tools, frameworks and libraries that I used for personal projects.",
+    "main": "",
+    "scripts": {
+        "prettier": "prettier --config .prettierrc --write .",
+        "prettier:check": "prettier --config .prettierrc --check .",
+        "test": "ts-node ./src/tests.ts"
+    },
+    "author": "ricochhet",
+    "license": "MIT",
+    "devDependencies": {
+        "@types/node": "^18.15.11",
+        "prettier": "^2.8.7",
+        "ts-node": "^10.9.1",
+        "typescript": "^5.0.4"
+    }
 }

@@ -1,1 +1,1 @@
-import "./tester/tests"
+import './tester/tests';

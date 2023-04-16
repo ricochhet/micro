@@ -47,10 +47,7 @@ export function GetFiles(directory: string): string[] {
 }
 
 export function GetDirectoriesRecursive(directory: string): string[] {
-    return [
-        directory,
-        ...GetDirectories(directory).map(GetDirectoriesRecursive),
-    ].flat();
+    return [directory, ...GetDirectories(directory).map(GetDirectoriesRecursive)].flat();
 }
 
 export function WalkDirectory(directory: string): string[] {
