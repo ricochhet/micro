@@ -5,7 +5,7 @@
     "main": "",
     "scripts": {
         "checks": "ts-node ./src/micro.checks.ts",
-        "build": "tsc ./src/micro.mod.ts --outDir dist --target es2022",
+        "build": "tsc ./src/micro.mod.ts ./src/micro.checks.ts ./src/microsys.mod.ts --outDir dist --target es2022",
         "prettier": "prettier --config .prettierrc --write ./src/",
         "prettier:check": "prettier --config .prettierrc --check ./src/",
         "test": "ts-node ./__tests__/tests.ts"

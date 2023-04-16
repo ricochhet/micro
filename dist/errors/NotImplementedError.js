@@ -1,23 +1,8 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
-import { SearchType } from '../providers/enums/SearchType';
-import FsProvider from '../providers/generic/FsProvider';
-import Logger from '../logger/Logger';
-import { LogType } from '../logger/enums/LogType';
-export const check_file_copyrights = (path, keywords, ext) => {
-    const files = FsProvider.GetPaths(SearchType.SearchAllFiles, path);
-    for (const i in files) {
-        const file = files[i];
-        const data = FsProvider.ReadFileSync(file);
-        if (FsProvider.GetExtName(file) === ext) {
-            for (const keyword of keywords) {
-                if (!data.includes(keyword)) {
-                    Logger.Log(LogType.ERROR, `File missing copyright: ${file}`);
-                }
-            }
-        }
-    }
-};
+import BaseError from './BaseError';
+export default class NotImplementedError extends BaseError {
+}
 // MIT License
 // This file is a part of github.com/ricochhet/micro
 // Copyright (c) 2023 Jon
