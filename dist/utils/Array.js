@@ -3,7 +3,6 @@
 class ArrayUtils {
     static Equals = (a, b) => {
         if (!b) {
-            console.log('what');
             return false;
         }
         if (b === a)

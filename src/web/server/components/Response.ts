@@ -3,6 +3,8 @@
 
 import { ServerResponse } from 'http';
 import { IResponse, IDataResponse, IOpResponse } from '../interfaces/IResponse';
+import Logger from '../../../logger/Logger';
+import { LogType } from '../../../logger/enums/LogType';
 
 declare module 'http' {
     interface ServerResponse extends IResponse {}
@@ -31,7 +33,7 @@ export const createResponse = (res: ServerResponse) => {
                     res.end(message);
                 }
 
-                console.log(`${url}: ${message} - ${statusCode}`);
+                Logger.Log(LogType.INFO, `${url}: ${message} - ${statusCode}`);
             },
         };
     };

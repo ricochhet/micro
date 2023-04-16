@@ -6,6 +6,8 @@ import { createServer } from 'http';
 import { readBody } from './components/Body';
 import { createResponse } from './components/Response';
 import { processMiddleware } from './components/Middleware';
+import Logger from '../../logger/Logger';
+import { LogType } from '../../logger/enums/LogType';
 // interface Service {
 //     get: (path: string, middleware: Function | null, cb: Function) => void
 //     post: (path: string, middleware: Function | null, cb: Function) => void
@@ -88,7 +90,7 @@ export default function service() {
             server.listen(port, cb);
             return {
                 message: (message) => {
-                    console.log(message);
+                    Logger.Log(LogType.INFO, message);
                 },
             };
         },

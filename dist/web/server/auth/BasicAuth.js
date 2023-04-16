@@ -5,7 +5,7 @@ import { Sha256 } from '../crypto/Sha256';
 const CREDENTIALS_REGEXP = new RegExp('^ *(?:[Bb][Aa][Ss][Ii][Cc]) +([A-Za-z0-9._~+/-]+=*) *$');
 const USER_PASS_REGEXP = new RegExp('^([^:]*):(.*)$');
 export default class BasicAuth {
-    static create(req, res, handler, middleware, basicAuthHandlerTable = null) {
+    static create(req, res, middleware, basicAuthHandlerTable = null) {
         if (!req.headers || typeof req.headers !== 'object')
             return;
         const headers = req.headers.authorization;
@@ -20,7 +20,7 @@ export default class BasicAuth {
             return null;
         if (typeof middleware !== 'function')
             return null;
-        if (!userPass || !this.handler(userPass[1], userPass[2], basicAuthHandlerTable)) {
+        if (!userPass || !this.handler(Sha256(userPass[1]), Sha256(userPass[2]), basicAuthHandlerTable)) {
             res.statusCode = 401;
             res.setHeader('WWW-Authenticate', 'Basic realm="realm"');
             res.end('Unauthorized');
@@ -31,8 +31,6 @@ export default class BasicAuth {
     }
     static handler(user, pass, basicAuthHandlerTable) {
         if (basicAuthHandlerTable) {
-            user = Sha256(user);
-            pass = Sha256(pass);
             for (const i in basicAuthHandlerTable) {
                 const compareUser = timeSafeCompare(user, basicAuthHandlerTable[i]['user']);
                 const comparePass = timeSafeCompare(pass, basicAuthHandlerTable[i]['pass']);

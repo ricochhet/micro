@@ -10,6 +10,8 @@ import { createResponse } from './components/Response';
 import { processMiddleware } from './components/Middleware';
 import { IMessage } from './interfaces/IMessage';
 import { Callback, Middleware } from './types/MiddlewareTypes';
+import Logger from '../../logger/Logger';
+import { LogType } from '../../logger/enums/LogType';
 
 declare module 'http' {
     interface IncomingMessage extends IMessage {}
@@ -106,7 +108,7 @@ export default function service() {
 
             return {
                 message: (message: string) => {
-                    console.log(message);
+                    Logger.Log(LogType.INFO, message);
                 },
             };
         },

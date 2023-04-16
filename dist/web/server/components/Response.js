@@ -1,5 +1,7 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
+import Logger from '../../../logger/Logger';
+import { LogType } from '../../../logger/enums/LogType';
 export const createResponse = (res) => {
     res.out = (message, statusCode) => {
         return {
@@ -22,7 +24,7 @@ export const createResponse = (res) => {
                 else {
                     res.end(message);
                 }
-                console.log(`${url}: ${message} - ${statusCode}`);
+                Logger.Log(LogType.INFO, `${url}: ${message} - ${statusCode}`);
             },
         };
     };

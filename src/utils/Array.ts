@@ -4,8 +4,6 @@
 export default class ArrayUtils {
     public static Equals = (a: Array<any>, b: Array<any>): boolean => {
         if (!b) {
-            console.log('what');
-
             return false;
         }
 
