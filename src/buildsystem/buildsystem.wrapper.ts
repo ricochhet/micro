@@ -7,26 +7,33 @@ import { generateComponents } from './core/ComponentBuilder';
 import { IBuildData, IData, ISettings, IStagingData, ITemplate } from './interfaces/ISettings';
 import FsProvider from '../providers/generic/FsProvider';
 
-const buffer: ISettings = json('./settings.json');
-const templates: Array<IData> = preload(buffer.build.templates as Array<string>);
-const components: Array<IData> = preload(buffer.build.components as Array<string>);
-const pages: Array<IBuildData> = buffer.build.pages;
-let generatedTemplates: Array<IData> = [];
-let stagingData: Array<IStagingData> = [];
-
 export default class BuildSystem {
+    private static buffer: ISettings;
+    private static templates: Array<IData> = [];
+    private static components: Array<IData> = [];
+    private static pages: Array<IBuildData> = [];
+    private static generatedTemplates: Array<IData> = [];
+    private static stagingData: Array<IStagingData> = [];
+
+    public static Set(src: string = './settings.json'): void {
+        this.buffer = json(src);
+        this.templates = preload(this.buffer.build.templates as Array<string>);
+        this.components = preload(this.buffer.build.components as Array<string>);
+        this.pages = this.buffer.build.pages;
+    }
+
     public static Stage(): void {
-        for (const i in pages) {
-            const page: IBuildData = pages[i];
+        for (const i in this.pages) {
+            const page: IBuildData = this.pages[i];
             const pagePath: string = page.path;
             let pageData: string = FsProvider.ReadFileSync(pagePath);
             const pageComponents: Array<string> = page.components;
             const pageTemplates: Array<ITemplate> = page.templates;
 
-            generatedTemplates = generateTemplates(pageTemplates, templates);
-            pageData = generateComponents(pageData, pageComponents, components, generatedTemplates);
+            this.generatedTemplates = generateTemplates(pageTemplates, this.templates);
+            pageData = generateComponents(pageData, pageComponents, this.components, this.generatedTemplates);
 
-            stagingData.push({
+            this.stagingData.push({
                 path: pagePath,
                 output: page.output,
                 data: pageData,
@@ -35,12 +42,12 @@ export default class BuildSystem {
     }
 
     public static Build(): void {
-        for (const i in stagingData) {
-            FsProvider.WriteFileSync(stagingData[i].output, stagingData[i].data);
+        for (const i in this.stagingData) {
+            FsProvider.WriteFileSync(this.stagingData[i].output, this.stagingData[i].data);
         }
 
-        FsProvider.CopyDirectory(buffer.publish.resources.data, buffer.publish.resources.output);
-        FsProvider.WriteFileSync(buffer.publish.cname.output, buffer.publish.cname.data);
+        FsProvider.CopyDirectory(this.buffer.publish.resources.data, this.buffer.publish.resources.output);
+        FsProvider.WriteFileSync(this.buffer.publish.cname.output, this.buffer.publish.cname.data);
     }
 }
 

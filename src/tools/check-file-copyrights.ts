@@ -17,6 +17,7 @@ export const check_file_copyrights = (path: string, keywords: string[], ext: str
             for (const keyword of keywords) {
                 if (!data.includes(keyword)) {
                     Logger.Log(LogType.ERROR, `File missing copyright: ${file}`);
+                    break;
                 }
             }
         }

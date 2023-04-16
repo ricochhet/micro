@@ -4,23 +4,29 @@ import { json, preload } from './core/_Preloader';
 import { generateTemplates } from './core/TemplateBuilder';
 import { generateComponents } from './core/ComponentBuilder';
 import FsProvider from '../providers/generic/FsProvider';
-const buffer = json('./settings.json');
-const templates = preload(buffer.build.templates);
-const components = preload(buffer.build.components);
-const pages = buffer.build.pages;
-let generatedTemplates = [];
-let stagingData = [];
-export default class BuildSystem {
+class BuildSystem {
+    static buffer;
+    static templates = [];
+    static components = [];
+    static pages = [];
+    static generatedTemplates = [];
+    static stagingData = [];
+    static Set(src = './settings.json') {
+        this.buffer = json(src);
+        this.templates = preload(this.buffer.build.templates);
+        this.components = preload(this.buffer.build.components);
+        this.pages = this.buffer.build.pages;
+    }
     static Stage() {
-        for (const i in pages) {
-            const page = pages[i];
+        for (const i in this.pages) {
+            const page = this.pages[i];
             const pagePath = page.path;
             let pageData = FsProvider.ReadFileSync(pagePath);
             const pageComponents = page.components;
             const pageTemplates = page.templates;
-            generatedTemplates = generateTemplates(pageTemplates, templates);
-            pageData = generateComponents(pageData, pageComponents, components, generatedTemplates);
-            stagingData.push({
+            this.generatedTemplates = generateTemplates(pageTemplates, this.templates);
+            pageData = generateComponents(pageData, pageComponents, this.components, this.generatedTemplates);
+            this.stagingData.push({
                 path: pagePath,
                 output: page.output,
                 data: pageData,
@@ -28,13 +34,14 @@ export default class BuildSystem {
         }
     }
     static Build() {
-        for (const i in stagingData) {
-            FsProvider.WriteFileSync(stagingData[i].output, stagingData[i].data);
+        for (const i in this.stagingData) {
+            FsProvider.WriteFileSync(this.stagingData[i].output, this.stagingData[i].data);
         }
-        FsProvider.CopyDirectory(buffer.publish.resources.data, buffer.publish.resources.output);
-        FsProvider.WriteFileSync(buffer.publish.cname.output, buffer.publish.cname.data);
+        FsProvider.CopyDirectory(this.buffer.publish.resources.data, this.buffer.publish.resources.output);
+        FsProvider.WriteFileSync(this.buffer.publish.cname.output, this.buffer.publish.cname.data);
     }
 }
+export default BuildSystem;
 // MIT License
 // This file is a part of github.com/ricochhet/micro
 // Copyright (c) 2023 Jon

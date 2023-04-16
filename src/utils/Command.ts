@@ -1,13 +1,21 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
 
-import Tester from './tester/Tester';
-import Logger from './logger/Logger';
-import FsProvider from './providers/generic/FsProvider';
-import BuildSystem from './buildsystem/buildsystem.wrapper';
-import Command from './utils/Command';
-import { check_file_copyrights } from './tools/check-file-copyrights';
-export { Tester, Logger, FsProvider, BuildSystem, Command, check_file_copyrights };
+export default class CommandUtils {
+    public static do(props: string[], callback: (params: string[], props: string[]) => void): void | Promise<void> {
+        const params = process.argv.slice(2);
+
+        if (!Array.isArray(props) || !props.length) return;
+        if (this.isEqual(params, props)) {
+            if (typeof callback !== 'function') return;
+            callback(params, props);
+        }
+    }
+
+    private static isEqual(array: string[], target: string[]) {
+        return target.every(i => array.includes(i));
+    }
+}
 
 // MIT License
 // This file is a part of github.com/ricochhet/micro

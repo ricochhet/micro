@@ -1,14 +1,10 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
-
-import Tester from './tester/Tester';
-import Logger from './logger/Logger';
-import FsProvider from './providers/generic/FsProvider';
-import BuildSystem from './buildsystem/buildsystem.wrapper';
-import Command from './utils/Command';
-import { check_file_copyrights } from './tools/check-file-copyrights';
-export { Tester, Logger, FsProvider, BuildSystem, Command, check_file_copyrights };
-
+// TODO - add micro.cli
+import { Command } from "./micro.mod";
+Command.do(['--hello-world'], () => {
+    console.log("hello, world");
+});
 // MIT License
 // This file is a part of github.com/ricochhet/micro
 // Copyright (c) 2023 Jon

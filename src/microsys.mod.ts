@@ -40,6 +40,8 @@ import * as microsys_consolecolors_ts from './logger/utils/ConsoleColors';
 export { microsys_consolecolors_ts };
 import * as microsys_micro_checks_ts from './micro.checks';
 export { microsys_micro_checks_ts };
+import * as microsys_micro_cli_ts from './micro.cli';
+export { microsys_micro_cli_ts };
 import * as microsys_micro_mod_ts from './micro.mod';
 export { microsys_micro_mod_ts };
 import * as microsys_microsys_mod_ts from './microsys.mod';
@@ -66,6 +68,8 @@ import * as microsys_import_gen_ts_ts from './tools/import-gen-ts';
 export { microsys_import_gen_ts_ts };
 import * as microsys_array_ts from './utils/Array';
 export { microsys_array_ts };
+import * as microsys_command_ts from './utils/Command';
+export { microsys_command_ts };
 
 // MIT License
 // This file is a part of github.com/ricochhet/micro
