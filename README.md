@@ -6,6 +6,7 @@ small utils/standard library for Typescript
 if you want to don't want to use Typescript, use the `./dist/` folder, otherwise, use the `./src/` folder.
 
 ### libraries
-- tester
-- logger
-- fsprovider
+- tester (simple test framework)
+- logger (static logger util)
+- fsprovider (filesystem wrapper)
+- buildsystem (react lite)

@@ -1,30 +1,23 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
-export const Reset = '\x1b[0m';
-export const Bright = '\x1b[1m';
-export const Dim = '\x1b[2m';
-export const Underscore = '\x1b[4m';
-export const Blink = '\x1b[5m';
-export const Reverse = '\x1b[7m';
-export const Hidden = '\x1b[8m';
-export const FgBlack = '\x1b[30m';
-export const FgRed = '\x1b[31m';
-export const FgGreen = '\x1b[32m';
-export const FgYellow = '\x1b[33m';
-export const FgBlue = '\x1b[34m';
-export const FgMagenta = '\x1b[35m';
-export const FgCyan = '\x1b[36m';
-export const FgWhite = '\x1b[37m';
-export const FgGray = '\x1b[90m';
-export const BgBlack = '\x1b[40m';
-export const BgRed = '\x1b[41m';
-export const BgGreen = '\x1b[42m';
-export const BgYellow = '\x1b[43m';
-export const BgBlue = '\x1b[44m';
-export const BgMagenta = '\x1b[45m';
-export const BgCyan = '\x1b[46m';
-export const BgWhite = '\x1b[47m';
-export const BgGray = '\x1b[100m';
+import { parseTemplateString } from './TemplateBuilder';
+export const generateComponents = (pageData, pageComponentList, loadedComponents, generatedTemplates) => {
+    let templatedString = pageData;
+    for (const j in pageComponentList) {
+        if (pageComponentList[j].includes('[template]')) {
+            const templateString = parseTemplateString(pageComponentList[j]);
+            const selectedTemplate = generatedTemplates.filter(tmpl => tmpl.name == `{${templateString.name}}`);
+            if (selectedTemplate.length > 0) {
+                templatedString = templatedString.split(pageComponentList[j]).join(selectedTemplate[templateString.index].data);
+            }
+        }
+        else {
+            const component = loadedComponents.find(c => c.name == pageComponentList[j]);
+            templatedString = templatedString.split(pageComponentList[j]).join(component?.data);
+        }
+    }
+    return templatedString;
+};
 // MIT License
 // This file is a part of github.com/ricochhet/micro
 // Copyright (c) 2023 Jon

@@ -2,10 +2,10 @@
 // See end of file for extended copyright information.
 
 import { IData, ISettings } from '../interfaces/ISettings';
-import { readFile } from '../providers/FsProvider';
+import FsProvider from '../../providers/generic/FsProvider';
 
 export const json = (sourcePath: string): ISettings => {
-    return JSON.parse(readFile(sourcePath).toString());
+    return JSON.parse(FsProvider.ReadFileSync(sourcePath).toString());
 };
 
 export const preload = (listToLoadFrom: Array<string>): Array<IData> => {
@@ -14,7 +14,7 @@ export const preload = (listToLoadFrom: Array<string>): Array<IData> => {
     for (const name in listToLoadFrom) {
         loadedItems.push({
             name: name,
-            data: readFile(listToLoadFrom[name]),
+            data: FsProvider.ReadFileSync(listToLoadFrom[name]),
         });
     }
 
