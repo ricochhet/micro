@@ -6,4 +6,5 @@ export const LogType = {
     ERROR: 'ERROR',
     SUCCESS: 'SUCCESS',
     BENCHMARK: 'BENCHMARK',
+    NOTICE: 'NOTICE'
 }

@@ -5,6 +5,9 @@ import { StatusType } from "./enum/StatusType"
 import ArrayUtils from "../utils/Array";
 
 export default class Tester {
+    private static _passes: number = 0;
+    private static _failures: number = 0;
+
     public static assert<T>(description: string, toTest: (expect: (actual: T, suppress?: boolean, _description?: string) => IExpect<T>) => void): string {
         try {
             toTest((actual, suppress, _description) => this.expect(actual, suppress, description))
@@ -14,11 +17,15 @@ export default class Tester {
             return StatusType.FAILURE;
         }
     }
+    public static report() {
+        Logger.Log(LogType.NOTICE, `PASSED: ${this._passes} - FAILED: ${this._failures}`)
+    }
     public static expect<T>(actual: T, suppress?: boolean, description?: string): IExpect<T> {
         const success = (expected: T): string => {
             if (suppress) return StatusType.SUCCESS;
             Logger.Log(LogType.SUCCESS, `PASS: ${description}`)
             Logger.Log(LogType.DEBUG, `PASS: ${actual} equals ${expected}`)
+            this._passes++;
             return StatusType.SUCCESS
         }
 
@@ -26,6 +33,7 @@ export default class Tester {
             if (suppress) return StatusType.FAILURE;
             Logger.Log(LogType.ERROR, `FAIL: ${description}`)
             Logger.Log(LogType.ERROR, `FAIL: ${actual} does not equal ${expected}`)
+            this._failures++;
             return StatusType.FAILURE;
         }
 
@@ -55,6 +63,13 @@ export default class Tester {
 
                 return failure(expected)
             },
+            toEqualValueAsObject(expected: T): string {
+                if (JSON.stringify(actual) === JSON.stringify(expected)) {
+                    return success(expected)
+                }
+
+                return failure(expected)
+            },
             toEqualType(expected: T): string {
                 if (typeof actual === typeof expected) {
                     return success(expected)
@@ -62,19 +77,13 @@ export default class Tester {
 
                 return failure(expected)
             },
-            toThrow(expected: T): string {
-                try {
-                    (actual as any)();
-                    return StatusType.UNKNOWN;
-                } catch (e) {
-                    const err: Error = <Error>e;
-                    if (err.message === expected) {
-                        return success(expected)
-                    }
-                    
-                    return failure(expected)
+            toEqualFunction(expected: T): string {
+                if ((actual as any)() === expected) {
+                    return success(expected)
                 }
-            }
+
+                return failure(expected)
+            },
         }
     }
 }

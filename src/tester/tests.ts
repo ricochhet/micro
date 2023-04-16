@@ -70,7 +70,6 @@ Tester.assert('expect ([1,2,[4,5]] == [[-1,0,1],2,3]) should equal FAILURE', (ex
 })
 
 Tester.assert('expect ([1,2,[4,5]] == [1,2,[4,5]]) should equal SUCCESS', (expect) => {
-    // fixme
     expect(expect([1, 2, [4, 5]], true).toEqualValueAsArray([1, 2, [4, 5]])).toEqualValue(StatusType.SUCCESS)
 })
 
@@ -89,3 +88,61 @@ Tester.assert('expect (true === false) should equal FAILURE', (expect) => {
 Tester.assert('expect (true === true) should equal SUCCESS', (expect) => {
     expect(expect(true, true).toEqualValueAndType(true)).toEqualValueAndType(StatusType.SUCCESS)
 })
+
+Tester.assert('expect (object === object) should equal SUCCESS', (expect) => {
+    expect(expect({ test: "hi" }, true).toEqualValueAsObject({ test: "hi" })).toEqualValueAndType(StatusType.SUCCESS)
+})
+
+Tester.assert('expect (object === object) should equal FAILURE', (expect) => {
+    expect(expect({ test: "hi" }, true).toEqualValueAsObject({ test: "hello" })).toEqualValueAndType(StatusType.FAILURE)
+})
+
+Tester.assert('expect (object === object) should equal SUCCESS', (expect) => {
+    expect(expect({ test: "hi", test1: { test2: ["hello"], test3: "hey" }}, true).toEqualValueAsObject({ test: "hi", test1: { test2: ["hello"], test3: "hey" }})).toEqualValueAndType(StatusType.SUCCESS)
+})
+
+Tester.assert('expect (object === object) should equal FAILURE', (expect) => {
+    expect(expect({ test: "hi", test1: { test2: ["hello"], test3: "hey" }}, true).toEqualValueAsObject({ test1: { test3: "hey", test2: ["hello"], test: "hi", }})).toEqualValueAndType(StatusType.FAILURE)
+})
+
+Tester.assert('expect ("hello" === 256) should equal FAILURE', (expect) => {
+    expect(expect("hello", true).toEqualType(256)).toEqualValueAndType(StatusType.FAILURE)
+})
+
+Tester.assert('expect ("hello" === "256") should equal SUCCESS', (expect) => {
+    expect(expect("hello", true).toEqualType("256")).toEqualValueAndType(StatusType.SUCCESS)
+})
+
+Tester.assert('expect (256 === 256.0) should equal SUCCESS', (expect) => {
+    expect(expect(256, true).toEqualType(256.256)).toEqualValueAndType(StatusType.SUCCESS)
+})
+
+Tester.assert('expect (256 === 256.0) should equal FAILURE', (expect) => {
+    expect(expect(256, true).toEqualValueAndType(256.256)).toEqualValueAndType(StatusType.FAILURE)
+})
+
+Tester.assert('expect (() => {} === null) should equal FAILURE', (expect) => {
+    expect(expect(() => {}, true).toEqualValueAndType(null)).toEqualValueAndType(StatusType.FAILURE)
+})
+
+Tester.assert('expect (undefined === null) should equal FAILURE', (expect) => {
+    expect(expect(undefined, true).toEqualValueAndType(null)).toEqualValueAndType(StatusType.FAILURE)
+})
+
+Tester.assert('expect (undefined === undefined) should equal SUCCESS', (expect) => {
+    expect(expect(undefined, true).toEqualValueAndType(undefined)).toEqualValueAndType(StatusType.SUCCESS)
+})
+
+Tester.assert('expect (() => { console.log("hi") } === "hi") should equal FAILURE', (expect) => {
+    expect(expect(() => { console.log("hi") }, true).toEqualValueAndType("hi")).toEqualValueAndType(StatusType.FAILURE)
+})
+
+Tester.assert('expect (() => { return "hi" } === "hi") should equal SUCCESS', (expect) => {
+    expect(expect(() => { return "hi" }, true).toEqualFunction("hi")).toEqualValueAndType(StatusType.SUCCESS)
+})
+
+Tester.assert('expect (() => { return "hi" } === "hello") should equal FAILURE', (expect) => {
+    expect(expect(() => { return "hi" }, true).toEqualFunction("hello")).toEqualValueAndType(StatusType.FAILURE)
+})
+
+Tester.report()
