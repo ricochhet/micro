@@ -2,7 +2,7 @@
 // See end of file for extended copyright information.
 
 import { LogType } from './LogType';
-import { FgRed, FgWhite, FgYellow, FgGray, FgGreen, FgBlue } from '../utils/ConsoleColors';
+import { FgRed, FgWhite, FgYellow, FgGray, FgGreen, FgBlue, BgRed } from '../utils/ConsoleColors';
 
 export abstract class LogTypeHelper {
     public static Color(type: string): string {
@@ -23,6 +23,8 @@ export abstract class LogTypeHelper {
                 return FgGray;
             case LogType.NOTICE:
                 return FgBlue;
+            case LogType.INSECURE:
+                return BgRed;
             default:
                 throw new Error();
         }

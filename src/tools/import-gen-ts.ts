@@ -29,6 +29,7 @@ export const import_gen_ts = (path: string, out: string) => {
     }
 
     output.push('\n' + FsProvider.ReadFileSync('./src/tools/gen-license-parts/license-footer.md'));
+    output.push('\n' + `microsys_module_security_warning_ts.module_security_warning("microsys.mod.ts")`);
     FsProvider.WriteFileSync(out, output.join('\n'));
 };
 

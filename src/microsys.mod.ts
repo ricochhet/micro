@@ -34,6 +34,8 @@ import * as microsys_micro_cli_ts from './micro.cli';
 export { microsys_micro_cli_ts };
 import * as microsys_micro_mod_ts from './micro.mod';
 export { microsys_micro_mod_ts };
+import * as microsys_micro_unsafe_ts from './micro.unsafe';
+export { microsys_micro_unsafe_ts };
 import * as microsys_microsys_mod_ts from './microsys.mod';
 export { microsys_microsys_mod_ts };
 import * as microsys_mkdirmode_ts from './providers/enums/MkdirMode';
@@ -56,6 +58,8 @@ import * as microsys_check_file_copyrights_ts from './tools/check-file-copyright
 export { microsys_check_file_copyrights_ts };
 import * as microsys_import_gen_ts_ts from './tools/import-gen-ts';
 export { microsys_import_gen_ts_ts };
+import * as microsys_module_security_warning_ts from './tools/module-security-warning';
+export { microsys_module_security_warning_ts };
 import * as microsys_array_ts from './utils/Array';
 export { microsys_array_ts };
 import * as microsys_command_ts from './utils/Command';
@@ -120,3 +124,5 @@ export { microsys_nodeworker_ts };
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+
+microsys_module_security_warning_ts.module_security_warning('microsys.mod.ts');

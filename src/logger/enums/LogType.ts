@@ -10,6 +10,7 @@ export const LogType = {
     SUCCESS: 'SUCCESS',
     BENCHMARK: 'BENCHMARK',
     NOTICE: 'NOTICE',
+    INSECURE: 'INSECURE',
 };
 
 // MIT License

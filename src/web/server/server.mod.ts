@@ -1,5 +1,7 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
+import { module_security_warning } from '../../tools/module-security-warning';
+module_security_warning('server');
 
 import { parseUrl } from './parsers/Url';
 import { parseQuery } from './parsers/Query';
@@ -16,14 +18,6 @@ import { LogType } from '../../logger/enums/LogType';
 declare module 'http' {
     interface IncomingMessage extends IMessage {}
 }
-
-// interface Service {
-//     get: (path: string, middleware: Function | null, cb: Function) => void
-//     post: (path: string, middleware: Function | null, cb: Function) => void
-//     put: (path: string, middleware: Function | null, cb: Function) => void
-//     delete: (path: string, middleware: Function | null, cb: Function) => void
-//     listen: (port: number, cb?: Function) => { message: (message: string) => void }
-// }
 
 export default function service() {
     const routeTable: any = {};

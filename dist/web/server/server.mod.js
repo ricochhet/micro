@@ -1,5 +1,7 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
+import { module_security_warning } from '../../tools/module-security-warning';
+module_security_warning('server');
 import { parseUrl } from './parsers/Url';
 import { parseQuery } from './parsers/Query';
 import { createServer } from 'http';
@@ -8,13 +10,6 @@ import { createResponse } from './components/Response';
 import { processMiddleware } from './components/Middleware';
 import Logger from '../../logger/Logger';
 import { LogType } from '../../logger/enums/LogType';
-// interface Service {
-//     get: (path: string, middleware: Function | null, cb: Function) => void
-//     post: (path: string, middleware: Function | null, cb: Function) => void
-//     put: (path: string, middleware: Function | null, cb: Function) => void
-//     delete: (path: string, middleware: Function | null, cb: Function) => void
-//     listen: (port: number, cb?: Function) => { message: (message: string) => void }
-// }
 export default function service() {
     const routeTable = {};
     const server = createServer(async (req, res) => {

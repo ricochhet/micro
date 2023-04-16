@@ -1,33 +1,9 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
-import { LogType } from './LogType';
-import { FgRed, FgWhite, FgYellow, FgGray, FgGreen, FgBlue, BgRed } from '../utils/ConsoleColors';
-export class LogTypeHelper {
-    static Color(type) {
-        switch (type) {
-            case LogType.DEBUG:
-                return FgGray;
-            case LogType.INFO:
-                return FgWhite;
-            case LogType.WARN:
-                return FgYellow;
-            case LogType.NATIVE:
-                return FgGray;
-            case LogType.ERROR:
-                return FgRed;
-            case LogType.SUCCESS:
-                return FgGreen;
-            case LogType.BENCHMARK:
-                return FgGray;
-            case LogType.NOTICE:
-                return FgBlue;
-            case LogType.INSECURE:
-                return BgRed;
-            default:
-                throw new Error();
-        }
-    }
-}
+import { module_security_warning } from './tools/module-security-warning';
+module_security_warning('micro.unsafe.ts');
+import Server from './web/server/server.mod';
+export { Server };
 // MIT License
 // This file is a part of github.com/ricochhet/micro
 // Copyright (c) 2023 Jon

@@ -9,6 +9,7 @@ export const LogType = {
     SUCCESS: 'SUCCESS',
     BENCHMARK: 'BENCHMARK',
     NOTICE: 'NOTICE',
+    INSECURE: 'INSECURE',
 };
 // MIT License
 // This file is a part of github.com/ricochhet/micro

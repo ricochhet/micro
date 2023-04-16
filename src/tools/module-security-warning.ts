@@ -1,33 +1,15 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
-import { LogType } from './LogType';
-import { FgRed, FgWhite, FgYellow, FgGray, FgGreen, FgBlue, BgRed } from '../utils/ConsoleColors';
-export class LogTypeHelper {
-    static Color(type) {
-        switch (type) {
-            case LogType.DEBUG:
-                return FgGray;
-            case LogType.INFO:
-                return FgWhite;
-            case LogType.WARN:
-                return FgYellow;
-            case LogType.NATIVE:
-                return FgGray;
-            case LogType.ERROR:
-                return FgRed;
-            case LogType.SUCCESS:
-                return FgGreen;
-            case LogType.BENCHMARK:
-                return FgGray;
-            case LogType.NOTICE:
-                return FgBlue;
-            case LogType.INSECURE:
-                return BgRed;
-            default:
-                throw new Error();
-        }
-    }
-}
+
+import UnsafeOpError from '../errors/UnsafeOpError';
+import Logger from '../logger/Logger';
+import { LogType } from '../logger/enums/LogType';
+
+export const module_security_warning = (module: string): void => {
+    Logger.Log(LogType.INSECURE, `The module (${module}) you are using is insecure, and should only be used in development environments.`);
+    Logger.Log(LogType.INSECURE, `You take full responsibility for your actions and any damages that may be caused due to misuse.`);
+};
+
 // MIT License
 // This file is a part of github.com/ricochhet/micro
 // Copyright (c) 2023 Jon
