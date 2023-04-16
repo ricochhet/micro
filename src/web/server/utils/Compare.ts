@@ -23,7 +23,7 @@ const bufferEqual = (a: Buffer, b: Buffer) => {
 export const timeSafeCompare = (a: string, b: string): boolean => {
     const sa: string = String(a);
     const sb: string = String(b);
-    const key: Buffer = crypto.pseudoRandomBytes(32);
+    const key: Buffer = crypto.randomBytes(32);
     const ah: Buffer = crypto.createHmac('sha256', key).update(sa).digest();
     const bh: Buffer = crypto.createHmac('sha256', key).update(sb).digest();
 

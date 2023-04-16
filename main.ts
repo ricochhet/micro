@@ -1,8 +1,12 @@
+import { timeSafeCompare } from "./src/web/server/utils/Compare";
+
 import { Server } from "./src/micro.mod";
 import BasicAuth from "./src/web/server/auth/BasicAuth";
 
-const app = Server()
 import * as fs from 'fs'
+import NodeWorker from './src/web/server/utils/NodeWorker'
+
+const app = Server()
 
 app.post('/auth', (req, res) => {
     BasicAuth.create(

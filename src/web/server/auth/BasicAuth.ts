@@ -11,7 +11,7 @@ const CREDENTIALS_REGEXP = new RegExp('^ *(?:[Bb][Aa][Ss][Ii][Cc]) +([A-Za-z0-9.
 const USER_PASS_REGEXP = new RegExp('^([^:]*):(.*)$');
 
 export default class BasicAuth {
-    public static create(req: IncomingMessage, res: ServerResponse, handler: Default, middleware: Default, basicAuthHandlerTable: BasicAuthHandlerTable | null = null) {
+    public static create(req: IncomingMessage, res: ServerResponse, middleware: Default, basicAuthHandlerTable: BasicAuthHandlerTable | null = null) {
         if (!req.headers || typeof req.headers !== 'object') return;
         const headers: string | undefined = req.headers.authorization;
         const decodeBase64 = (str: string) => {
@@ -25,7 +25,7 @@ export default class BasicAuth {
         if (!userPass) return null;
 
         if (typeof middleware !== 'function') return null;
-        if (!userPass || !this.handler(userPass[1], userPass[2], basicAuthHandlerTable)) {
+        if (!userPass || !this.handler(Sha256(userPass[1]), Sha256(userPass[2]), basicAuthHandlerTable)) {
             res.statusCode = 401;
             res.setHeader('WWW-Authenticate', 'Basic realm="realm"');
             res.end('Unauthorized');
@@ -36,9 +36,6 @@ export default class BasicAuth {
 
     public static handler(user: string, pass: string, basicAuthHandlerTable: BasicAuthHandlerTable | null): boolean | null {
         if (basicAuthHandlerTable) {
-            user = Sha256(user);
-            pass = Sha256(pass);
-
             for (const i in basicAuthHandlerTable) {
                 const compareUser: boolean = timeSafeCompare(user, basicAuthHandlerTable[i]['user']);
                 const comparePass: boolean = timeSafeCompare(pass, basicAuthHandlerTable[i]['pass']);
