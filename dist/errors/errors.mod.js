@@ -1,6 +1,6 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
-import BaseError from "./BaseError";
+import BaseError from './BaseError';
 export { BaseError };
 // MIT License
 // This file is a part of github.com/ricochhet/micro

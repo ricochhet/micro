@@ -1,7 +1,7 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
 
-import BuildSystem from './buildsystem/buildsystem.wrapper';
+import BuildSystem from './buildsystem/buildsystem.mod';
 import Server from './server/server.mod';
 export { BuildSystem, Server };
 
