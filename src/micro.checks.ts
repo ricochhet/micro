@@ -2,7 +2,10 @@
 // See end of file for extended copyright information.
 
 import { check_file_copyrights } from './tools/check-file-copyrights';
-check_file_copyrights('./src/', ['Copyright (c) 2023 Jon', 'MIT License', 'This file is a part of github.com/ricochhet/micro']);
+import { import_gen_ts } from './tools/import-gen-ts';
+
+check_file_copyrights('./src/', ['Copyright (c) 2023 Jon', 'MIT License', 'This file is a part of github.com/ricochhet/micro'], '.ts');
+import_gen_ts('./src/', './src/microsys.mod.ts');
 
 // MIT License
 // This file is a part of github.com/ricochhet/micro

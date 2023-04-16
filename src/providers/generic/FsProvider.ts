@@ -2,6 +2,7 @@
 // See end of file for extended copyright information.
 
 import * as fs from 'fs';
+import * as path from 'path';
 import { SearchType } from '../enums/SearchType';
 import FileReadError from '../../errors/FileReadError';
 import FileCopyError from '../../errors/FileCopyError';
@@ -12,6 +13,7 @@ import FileRemoveError from '../../errors/FileRemoveError';
 import { _cleanEmptyDirectories, _copyDirectory, EnsureDirectoryExistence } from './FsProviderUtils';
 import { MkdirMode } from '../enums/MkdirMode';
 import EnumError from '../../errors/EnumError';
+import BaseError from '../../errors/BaseError';
 
 export default class FsProvider {
     private static CHECK_FILE_SAFETY: boolean = true;
@@ -22,6 +24,26 @@ export default class FsProvider {
         if (unsafeValues.includes(directory)) throw new UnsafeOpError('Unsafe file operation', 'Directory is unsafe');
 
         return true;
+    }
+
+    public static GetBaseName(directory: string, safety: boolean = FsProvider.CHECK_FILE_SAFETY): string {
+        try {
+            if (safety) FsProvider.IsPathSafe(directory);
+            return path.basename(directory, path.extname(directory));
+        } catch (e) {
+            const err: Error = <Error>e;
+            throw new BaseError('Failed to return path.basename', err.message, null);
+        }
+    }
+
+    public static GetExtName(directory: string, safety: boolean = FsProvider.CHECK_FILE_SAFETY): string {
+        try {
+            if (safety) FsProvider.IsPathSafe(directory);
+            return path.extname(directory);
+        } catch (e) {
+            const err: Error = <Error>e;
+            throw new BaseError('Failed to return path.basename', err.message, null);
+        }
     }
 
     public static ReadFileSync(directory: string, safety: boolean = FsProvider.CHECK_FILE_SAFETY): string {
