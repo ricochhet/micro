@@ -1,10 +1,36 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
-// TODO - add micro.cli
-import { Command } from './micro.mod';
-Command.do(['--hello-world'], () => {
-    console.log('hello, world');
-});
+
+export interface IResponse {
+    out: (
+        message: string,
+        statusCode?: number,
+    ) => {
+        _write: () => void;
+        _send: () => void;
+        send: (url: string, outLog?: boolean) => void;
+    };
+    data: (message: any) => {
+        json: () => void;
+        html: () => void;
+        custom: (name: string, value: string) => void;
+    };
+    json: (message: unknown) => void;
+    html: (message: string) => void;
+}
+
+export interface IDataResponse {
+    json: () => void;
+    html: () => void;
+    custom: (name: string, value: string) => void;
+}
+
+export interface IOpResponse {
+    _write: () => void;
+    _send: () => void;
+    send: (url: string, outlog?: boolean) => void;
+}
+
 // MIT License
 // This file is a part of github.com/ricochhet/micro
 // Copyright (c) 2023 Jon

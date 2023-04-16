@@ -1,10 +1,12 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
-// TODO - add micro.cli
-import { Command } from './micro.mod';
-Command.do(['--hello-world'], () => {
-    console.log('hello, world');
-});
+
+import * as crypto from 'crypto';
+
+export const Sha256 = (data: string) => {
+    return crypto.createHash('sha256').update(data).digest('hex');
+};
+
 // MIT License
 // This file is a part of github.com/ricochhet/micro
 // Copyright (c) 2023 Jon

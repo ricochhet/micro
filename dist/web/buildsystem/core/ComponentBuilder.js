@@ -1,10 +1,23 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
-// TODO - add micro.cli
-import { Command } from './micro.mod';
-Command.do(['--hello-world'], () => {
-    console.log('hello, world');
-});
+import { parseTemplateString } from './TemplateBuilder';
+export const generateComponents = (pageData, pageComponentList, loadedComponents, generatedTemplates) => {
+    let templatedString = pageData;
+    for (const j in pageComponentList) {
+        if (pageComponentList[j].includes('[template]')) {
+            const templateString = parseTemplateString(pageComponentList[j]);
+            const selectedTemplate = generatedTemplates.filter(tmpl => tmpl.name == `{${templateString.name}}`);
+            if (selectedTemplate.length > 0) {
+                templatedString = templatedString.split(pageComponentList[j]).join(selectedTemplate[templateString.index].data);
+            }
+        }
+        else {
+            const component = loadedComponents.find(c => c.name == pageComponentList[j]);
+            templatedString = templatedString.split(pageComponentList[j]).join(component?.data);
+        }
+    }
+    return templatedString;
+};
 // MIT License
 // This file is a part of github.com/ricochhet/micro
 // Copyright (c) 2023 Jon

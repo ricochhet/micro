@@ -1,10 +1,12 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
-// TODO - add micro.cli
-import { Command } from './micro.mod';
-Command.do(['--hello-world'], () => {
-    console.log('hello, world');
-});
+
+export interface IMessage {
+    params: Record<string, string> | undefined;
+    query: Record<string, string> | undefined;
+    body: any | undefined;
+}
+
 // MIT License
 // This file is a part of github.com/ricochhet/micro
 // Copyright (c) 2023 Jon

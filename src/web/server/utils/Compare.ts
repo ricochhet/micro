@@ -1,10 +1,35 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
-// TODO - add micro.cli
-import { Command } from './micro.mod';
-Command.do(['--hello-world'], () => {
-    console.log('hello, world');
-});
+
+import * as crypto from 'crypto';
+
+const bufferEqual = (a: Buffer, b: Buffer) => {
+    if (a.length !== b.length) {
+        return false;
+    }
+
+    if (crypto.timingSafeEqual) {
+        return crypto.timingSafeEqual(a, b);
+    }
+
+    for (let i = 0; i < a.length; i++) {
+        if (a[i] !== b[i]) {
+            return false;
+        }
+    }
+    return true;
+};
+
+export const timeSafeCompare = (a: string, b: string): boolean => {
+    const sa: string = String(a);
+    const sb: string = String(b);
+    const key: Buffer = crypto.pseudoRandomBytes(32);
+    const ah: Buffer = crypto.createHmac('sha256', key).update(sa).digest();
+    const bh: Buffer = crypto.createHmac('sha256', key).update(sb).digest();
+
+    return bufferEqual(ah, bh) && a === b;
+};
+
 // MIT License
 // This file is a part of github.com/ricochhet/micro
 // Copyright (c) 2023 Jon

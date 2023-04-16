@@ -1,10 +1,26 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
-// TODO - add micro.cli
-import { Command } from './micro.mod';
-Command.do(['--hello-world'], () => {
-    console.log('hello, world');
-});
+
+import { IncomingMessage } from 'http';
+
+export const readBody = (req: IncomingMessage): Promise<string> => {
+    return new Promise((resolve, reject) => {
+        let body: string = '';
+
+        req.on('data', chunk => {
+            body += '' + chunk;
+        });
+
+        req.on('end', () => {
+            resolve(body);
+        });
+
+        req.on('error', err => {
+            reject(err);
+        });
+    });
+};
+
 // MIT License
 // This file is a part of github.com/ricochhet/micro
 // Copyright (c) 2023 Jon

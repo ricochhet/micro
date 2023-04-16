@@ -4,16 +4,6 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
 
-import * as microsys_buildsystem_wrapper_ts from './buildsystem/buildsystem.wrapper';
-export { microsys_buildsystem_wrapper_ts };
-import * as microsys_componentbuilder_ts from './buildsystem/core/ComponentBuilder';
-export { microsys_componentbuilder_ts };
-import * as microsys_templatebuilder_ts from './buildsystem/core/TemplateBuilder';
-export { microsys_templatebuilder_ts };
-import * as microsys__preloader_ts from './buildsystem/core/_Preloader';
-export { microsys__preloader_ts };
-import * as microsys_isettings_ts from './buildsystem/interfaces/ISettings';
-export { microsys_isettings_ts };
 import * as microsys_baseerror_ts from './errors/BaseError';
 export { microsys_baseerror_ts };
 import * as microsys_enumerror_ts from './errors/EnumError';
@@ -70,6 +60,44 @@ import * as microsys_array_ts from './utils/Array';
 export { microsys_array_ts };
 import * as microsys_command_ts from './utils/Command';
 export { microsys_command_ts };
+import * as microsys_buildsystem_wrapper_ts from './web/buildsystem/buildsystem.wrapper';
+export { microsys_buildsystem_wrapper_ts };
+import * as microsys_componentbuilder_ts from './web/buildsystem/core/ComponentBuilder';
+export { microsys_componentbuilder_ts };
+import * as microsys_templatebuilder_ts from './web/buildsystem/core/TemplateBuilder';
+export { microsys_templatebuilder_ts };
+import * as microsys__preloader_ts from './web/buildsystem/core/_Preloader';
+export { microsys__preloader_ts };
+import * as microsys_isettings_ts from './web/buildsystem/interfaces/ISettings';
+export { microsys_isettings_ts };
+import * as microsys_basicauth_ts from './web/server/auth/BasicAuth';
+export { microsys_basicauth_ts };
+import * as microsys_body_ts from './web/server/components/Body';
+export { microsys_body_ts };
+import * as microsys_middleware_ts from './web/server/components/Middleware';
+export { microsys_middleware_ts };
+import * as microsys_response_ts from './web/server/components/Response';
+export { microsys_response_ts };
+import * as microsys_sha256_ts from './web/server/crypto/Sha256';
+export { microsys_sha256_ts };
+import * as microsys_imessage_ts from './web/server/interfaces/IMessage';
+export { microsys_imessage_ts };
+import * as microsys_iresponse_ts from './web/server/interfaces/IResponse';
+export { microsys_iresponse_ts };
+import * as microsys_query_ts from './web/server/parsers/Query';
+export { microsys_query_ts };
+import * as microsys_url_ts from './web/server/parsers/Url';
+export { microsys_url_ts };
+import * as microsys_server_mod_ts from './web/server/server.mod';
+export { microsys_server_mod_ts };
+import * as microsys_basicauthtypes_ts from './web/server/types/BasicAuthTypes';
+export { microsys_basicauthtypes_ts };
+import * as microsys_middlewaretypes_ts from './web/server/types/MiddlewareTypes';
+export { microsys_middlewaretypes_ts };
+import * as microsys_cluster_ts from './web/server/utils/Cluster';
+export { microsys_cluster_ts };
+import * as microsys_compare_ts from './web/server/utils/Compare';
+export { microsys_compare_ts };
 
 // MIT License
 // This file is a part of github.com/ricochhet/micro

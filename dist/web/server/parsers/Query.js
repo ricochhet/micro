@@ -1,10 +1,22 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
-// TODO - add micro.cli
-import { Command } from './micro.mod';
-Command.do(['--hello-world'], () => {
-    console.log('hello, world');
-});
+export const parseQuery = (url) => {
+    const results = url.match(/\?(?<query>.*)/);
+    if (!results) {
+        return {};
+    }
+    const queryMatch = results.groups?.query;
+    if (!queryMatch) {
+        return {};
+    }
+    const pairs = queryMatch.match(/(?<param>\w+)=(?<value>\w+)/g);
+    const params = pairs?.reduce((acc, curr) => {
+        const [key, value] = curr.split('=');
+        acc[key] = value;
+        return acc;
+    }, {});
+    return params;
+};
 // MIT License
 // This file is a part of github.com/ricochhet/micro
 // Copyright (c) 2023 Jon

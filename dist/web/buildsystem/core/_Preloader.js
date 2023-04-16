@@ -1,10 +1,19 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
-// TODO - add micro.cli
-import { Command } from './micro.mod';
-Command.do(['--hello-world'], () => {
-    console.log('hello, world');
-});
+import FsProvider from '../../../providers/generic/FsProvider';
+export const json = (sourcePath) => {
+    return JSON.parse(FsProvider.ReadFileSync(sourcePath).toString());
+};
+export const preload = (listToLoadFrom) => {
+    const loadedItems = [];
+    for (const name in listToLoadFrom) {
+        loadedItems.push({
+            name: name,
+            data: FsProvider.ReadFileSync(listToLoadFrom[name]),
+        });
+    }
+    return loadedItems;
+};
 // MIT License
 // This file is a part of github.com/ricochhet/micro
 // Copyright (c) 2023 Jon
