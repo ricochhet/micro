@@ -3,6 +3,8 @@
 
 import { SearchType } from '../providers/enums/SearchType';
 import FsProvider from '../providers/generic/FsProvider';
+import Logger from '../logger/Logger';
+import { LogType } from '../logger/enums/LogType';
 
 export const check_file_copyrights = (path: string, keywords: string[], ext: string) => {
     const files: string[] = FsProvider.GetPaths(SearchType.SearchAllFiles, path);
@@ -14,7 +16,7 @@ export const check_file_copyrights = (path: string, keywords: string[], ext: str
         if (FsProvider.GetExtName(file) === ext) {
             for (const keyword of keywords) {
                 if (!data.includes(keyword)) {
-                    console.log(`error: file missing copyright: ${file}`);
+                    Logger.Log(LogType.ERROR, `File missing copyright: ${file}`);
                 }
             }
         }
