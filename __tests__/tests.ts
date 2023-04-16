@@ -672,42 +672,42 @@ Logger.Log(LogType.WARN, '-------------BLOCK 33------------');
 Tester.assert('expect (() => { "hi" } === "hi") should equal FAILURE', expect => {
     expect(
         expect(() => {
-            "hi"
+            'hi';
         }, true).toEqualValueAndType('hi'),
     ).toEqualValueAndType(StatusType.FAILURE);
 });
 Tester.assert('expect (() => { "hi" } === "hi") should equal FAILURE', expect => {
     expect(
         expect(() => {
-            "hi"
+            'hi';
         }, true).toEqualValue('hi'),
     ).toEqualValueAndType(StatusType.FAILURE);
 });
 Tester.assert('expect (() => { "hi" } === "hi") should equal FAILURE', expect => {
     expect(
         expect(() => {
-            "hi"
+            'hi';
         }, true).toEqualValueAsArray('hi'),
     ).toEqualValueAndType(StatusType.FAILURE);
 });
 Tester.assert('expect (() => { "hi" } === "hi") should equal FAILURE', expect => {
     expect(
         expect(() => {
-            "hi"
+            'hi';
         }, true).toEqualType('hi'),
     ).toEqualValueAndType(StatusType.FAILURE);
 });
 Tester.assert('expect (() => { "hi" } === "hi") should equal FAILURE', expect => {
     expect(
         expect(() => {
-            "hi"
+            'hi';
         }, true).toEqualFunction('hi'),
     ).toEqualValueAndType(StatusType.FAILURE);
 });
 Tester.assert('expect (() => { "hi" } === "hi") should equal FAILURE', expect => {
     expect(
         expect(() => {
-            "hi"
+            'hi';
         }, true).toEqualValueAsObject('hi'),
     ).toEqualValueAndType(StatusType.FAILURE);
 });

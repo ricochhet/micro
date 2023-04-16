@@ -1,3 +1,4 @@
-import Tester from "./tester/Tester";
+import Tester from './tester/Tester';
+import Logger from './logger/Logger';
 
-export { Tester }
+export { Tester, Logger };

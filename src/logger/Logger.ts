@@ -1,7 +1,15 @@
 import { LogTypeHelper } from './enums/LogTypeHelper';
+import FsProvider from '../providers/generic/FsProvider';
 
 export default class Logger {
     private static logList: string[] = [];
+    private static outLog: boolean = false;
+    private static outLogPath: string = '';
+
+    public static Options(_out: boolean, _path: string) {
+        this.outLog = _out;
+        this.outLogPath = _path;
+    }
 
     public static async Log(type: string, error: string) {
         Logger.logList.push(`${new Date().toLocaleDateString()} [${type}]: ${error}`);
@@ -11,7 +19,9 @@ export default class Logger {
     }
 
     private static async Write() {
-        //        FsProvider.WriteFileSync(this.logLocation, Logger.logList.join("\n"))
+        if (this.outLog && this.outLogPath && this.outLogPath.length !== 0) {
+            FsProvider.WriteFileSync(this.outLogPath, Logger.logList.join('\n'));
+        }
     }
 
     private static Stdout(type: string, message: string) {
