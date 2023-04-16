@@ -1,5 +1,5 @@
-import Tester from "../Tester"
-import { StatusType } from "../enum/StatusType"
+import Tester from "./Tester"
+import { StatusType } from "./enum/StatusType"
 
 Tester.assert('expect (100 === 200) should equal FAILURE', (expect) => {
     expect(expect(100, true).toEqualValueAndType(200)).toEqualValueAndType(StatusType.FAILURE)
@@ -55,6 +55,23 @@ Tester.assert('expect ([1,2,3] === [1,2,3]) should equal FAILURE', (expect) => {
 
 Tester.assert('expect ([1,2,3] == [3,2,1]) should equal FAILURE', (expect) => {
     expect(expect([1, 2, 3], true).toEqualValue([3, 2, 1])).toEqualValue(StatusType.FAILURE)
+})
+
+Tester.assert('expect ([1,2,3] == [3,2,1]) should equal FAILURE', (expect) => {
+    expect(expect([1, 2, 3], true).toEqualValueAsArray([3, 2, 1])).toEqualValue(StatusType.FAILURE)
+})
+
+Tester.assert('expect ([1,2,3] == [1,2,3]) should equal SUCCESS', (expect) => {
+    expect(expect([1, 2, 3], true).toEqualValueAsArray([1, 2, 3])).toEqualValue(StatusType.SUCCESS)
+})
+
+Tester.assert('expect ([1,2,[4,5]] == [[-1,0,1],2,3]) should equal FAILURE', (expect) => {
+    expect(expect([1, 2, [4, 5]], true).toEqualValueAsArray([[-1, 0, 1], 2, 3])).toEqualValue(StatusType.FAILURE)
+})
+
+Tester.assert('expect ([1,2,[4,5]] == [1,2,[4,5]]) should equal SUCCESS', (expect) => {
+    // fixme
+    expect(expect([1, 2, [4, 5]], true).toEqualValueAsArray([1, 2, [4, 5]])).toEqualValue(StatusType.SUCCESS)
 })
 
 Tester.assert('expect (["a", "b", "c"] === ["a", "b", "c"]) should equal FAILURE', (expect) => {

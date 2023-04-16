@@ -4,7 +4,7 @@
   "description": "small zero-dependency tools, frameworks and libraries that I used for personal projects.",
   "main": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "ts-node ./src/tests.ts"
   },
   "author": "ricochhet",
   "license": "MIT",
