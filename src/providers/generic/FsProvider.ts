@@ -1,3 +1,6 @@
+// Copyright (c) 2023 Jon
+// See end of file for extended copyright information.
+
 import * as fs from 'fs';
 import { SearchType } from '../enums/SearchType';
 import FileReadError from '../../errors/FileReadError';
@@ -6,7 +9,7 @@ import UnsafeOpError from '../../errors/UnsafeOpError';
 import SearchTypeResolver from '../enums/SearchTypeResolver';
 import FileWriteError from '../../errors/FileWriteError';
 import FileRemoveError from '../../errors/FileRemoveError';
-import { _cleanEmptyDirectories, EnsureDirectoryExistence } from './FsProviderUtils';
+import { _cleanEmptyDirectories, _copyDirectory, EnsureDirectoryExistence } from './FsProviderUtils';
 import { MkdirMode } from '../enums/MkdirMode';
 import EnumError from '../../errors/EnumError';
 
@@ -106,6 +109,16 @@ export default class FsProvider {
         }
     }
 
+    public static CopyDirectory(src: string, dest: string, safety: boolean = FsProvider.CHECK_FILE_SAFETY): FileCopyError | undefined {
+        try {
+            if (safety) FsProvider.IsPathSafe(src) && FsProvider.IsPathSafe(dest);
+            _copyDirectory(src, dest);
+        } catch (e) {
+            const err: Error = <Error>e;
+            return new FileCopyError('Failed to copy directory', err.message, null);
+        }
+    }
+
     public static ExistsSync(directory: string, safety: boolean = FsProvider.CHECK_FILE_SAFETY): boolean {
         if (safety) FsProvider.IsPathSafe(directory);
         return fs.existsSync(directory);
@@ -116,3 +129,25 @@ export default class FsProvider {
         return SearchTypeResolver(type, directory);
     }
 }
+
+// MIT License
+// This file is a part of github.com/ricochhet/micro
+// Copyright (c) 2023 Jon
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.

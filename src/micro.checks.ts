@@ -1,10 +1,8 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
 
-export enum MkdirMode {
-    ANY_EXISTENCE,
-    NO_EXISTENCE,
-}
+import { check_file_copyrights } from './tools/check-file-copyrights';
+check_file_copyrights('./src/', ['Copyright (c) 2023 Jon', 'MIT License', 'This file is a part of github.com/ricochhet/micro']);
 
 // MIT License
 // This file is a part of github.com/ricochhet/micro

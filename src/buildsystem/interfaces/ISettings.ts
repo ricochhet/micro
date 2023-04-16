@@ -1,9 +1,50 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
 
-export enum MkdirMode {
-    ANY_EXISTENCE,
-    NO_EXISTENCE,
+export interface ISettings {
+    templates: Array<object>;
+    components: Array<object>;
+    build: IBuildSettings;
+    publish: IPublishSettings;
+}
+
+export interface IPublishSettings {
+    resources: IPublishData;
+    cname: IPublishData;
+}
+
+export interface IPublishData {
+    data: string;
+    output: string;
+}
+
+export interface IBuildSettings {
+    templates: Array<string>;
+    components: Array<string>;
+    pages: Array<IBuildData>;
+}
+
+export interface IBuildData {
+    path: string;
+    output: string;
+    templates: Array<ITemplate>;
+    components: Array<string>;
+}
+
+export interface ITemplate {
+    name: string;
+    data: object;
+}
+
+export interface IData {
+    name: string;
+    data: string;
+}
+
+export interface IStagingData {
+    path: string;
+    output: string;
+    data: string;
 }
 
 // MIT License

@@ -1,10 +1,28 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
 
-export enum MkdirMode {
-    ANY_EXISTENCE,
-    NO_EXISTENCE,
-}
+import { IData } from '../interfaces/ISettings';
+import { parseTemplateString } from './TemplateBuilder';
+
+export const generateComponents = (pageData: string, pageComponentList: Array<string>, loadedComponents: Array<IData>, generatedTemplates: Array<IData>): string => {
+    let templatedString: string = pageData;
+
+    for (const j in pageComponentList) {
+        if (pageComponentList[j].includes('[template]')) {
+            const templateString: { index: number; name: string } = parseTemplateString(pageComponentList[j]);
+            const selectedTemplate: IData[] = generatedTemplates.filter(tmpl => tmpl.name == `{${templateString.name}}`);
+
+            if (selectedTemplate.length > 0) {
+                templatedString = templatedString.split(pageComponentList[j]).join(selectedTemplate[templateString.index].data);
+            }
+        } else {
+            const component: IData | undefined = loadedComponents.find(c => c.name == pageComponentList[j]);
+            templatedString = templatedString.split(pageComponentList[j]).join(component?.data);
+        }
+    }
+
+    return templatedString;
+};
 
 // MIT License
 // This file is a part of github.com/ricochhet/micro

@@ -1,10 +1,25 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
 
-export enum MkdirMode {
-    ANY_EXISTENCE,
-    NO_EXISTENCE,
-}
+import { IData, ISettings } from '../interfaces/ISettings';
+import { readFile } from '../providers/FsProvider';
+
+export const json = (sourcePath: string): ISettings => {
+    return JSON.parse(readFile(sourcePath).toString());
+};
+
+export const preload = (listToLoadFrom: Array<string>): Array<IData> => {
+    const loadedItems: Array<IData> = [];
+
+    for (const name in listToLoadFrom) {
+        loadedItems.push({
+            name: name,
+            data: readFile(listToLoadFrom[name]),
+        });
+    }
+
+    return loadedItems;
+};
 
 // MIT License
 // This file is a part of github.com/ricochhet/micro
