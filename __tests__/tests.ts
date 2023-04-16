@@ -669,45 +669,45 @@ Tester.assert('expect (undefined === undefined) should equal SUCCESS', expect =>
 });
 
 Logger.Log(LogType.WARN, '-------------BLOCK 33------------');
-Tester.assert('expect (() => { console.log("hi") } === "hi") should equal FAILURE', expect => {
+Tester.assert('expect (() => { "hi" } === "hi") should equal FAILURE', expect => {
     expect(
         expect(() => {
-            console.log('hi');
+            "hi"
         }, true).toEqualValueAndType('hi'),
     ).toEqualValueAndType(StatusType.FAILURE);
 });
-Tester.assert('expect (() => { console.log("hi") } === "hi") should equal FAILURE', expect => {
+Tester.assert('expect (() => { "hi" } === "hi") should equal FAILURE', expect => {
     expect(
         expect(() => {
-            console.log('hi');
+            "hi"
         }, true).toEqualValue('hi'),
     ).toEqualValueAndType(StatusType.FAILURE);
 });
-Tester.assert('expect (() => { console.log("hi") } === "hi") should equal FAILURE', expect => {
+Tester.assert('expect (() => { "hi" } === "hi") should equal FAILURE', expect => {
     expect(
         expect(() => {
-            console.log('hi');
+            "hi"
         }, true).toEqualValueAsArray('hi'),
     ).toEqualValueAndType(StatusType.FAILURE);
 });
-Tester.assert('expect (() => { console.log("hi") } === "hi") should equal FAILURE', expect => {
+Tester.assert('expect (() => { "hi" } === "hi") should equal FAILURE', expect => {
     expect(
         expect(() => {
-            console.log('hi');
+            "hi"
         }, true).toEqualType('hi'),
     ).toEqualValueAndType(StatusType.FAILURE);
 });
-Tester.assert('expect (() => { console.log("hi") } === "hi") should equal FAILURE', expect => {
+Tester.assert('expect (() => { "hi" } === "hi") should equal FAILURE', expect => {
     expect(
         expect(() => {
-            console.log('hi');
+            "hi"
         }, true).toEqualFunction('hi'),
     ).toEqualValueAndType(StatusType.FAILURE);
 });
-Tester.assert('expect (() => { console.log("hi") } === "hi") should equal FAILURE', expect => {
+Tester.assert('expect (() => { "hi" } === "hi") should equal FAILURE', expect => {
     expect(
         expect(() => {
-            console.log('hi');
+            "hi"
         }, true).toEqualValueAsObject('hi'),
     ).toEqualValueAndType(StatusType.FAILURE);
 });
