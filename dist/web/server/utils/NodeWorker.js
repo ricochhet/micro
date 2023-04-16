@@ -1,36 +1,32 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
-
 import clust from 'cluster';
 import { cpus } from 'os';
-
 export default function cluster(handler, callback) {
     const numCPUs = cpus().length;
-
     if (clust.isPrimary) {
         console.log(`Primary ${process.pid} is running`);
-
         for (let i = 0; i < numCPUs; i++) {
             clust.fork();
         }
-
         clust.on('exit', (worker, code, signal) => {
             if (signal) {
                 console.log(`Worker ${worker.process.pid} was killed by signal: ${signal}`);
-            } else if (code !== 0) {
+            }
+            else if (code !== 0) {
                 console.log(`Worker ${worker.process.pid} exited with error code: ${code}`);
-            } else {
+            }
+            else {
                 console.log(`Worker ${worker.process.pid} success`);
             }
         });
-
         callback(process.pid, process);
-    } else {
+    }
+    else {
         handler(process.pid, process);
         console.log(`Worker ${process.pid} started`);
     }
 }
-
 // MIT License
 // This file is a part of github.com/ricochhet/micro
 // Copyright (c) 2023 Jon

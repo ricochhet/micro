@@ -94,10 +94,10 @@ import * as microsys_basicauthtypes_ts from './web/server/types/BasicAuthTypes';
 export { microsys_basicauthtypes_ts };
 import * as microsys_middlewaretypes_ts from './web/server/types/MiddlewareTypes';
 export { microsys_middlewaretypes_ts };
-import * as microsys_cluster_ts from './web/server/utils/Cluster';
-export { microsys_cluster_ts };
 import * as microsys_compare_ts from './web/server/utils/Compare';
 export { microsys_compare_ts };
+import * as microsys_nodeworker_ts from './web/server/utils/NodeWorker';
+export { microsys_nodeworker_ts };
 
 // MIT License
 // This file is a part of github.com/ricochhet/micro
