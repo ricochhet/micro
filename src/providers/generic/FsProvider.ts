@@ -6,7 +6,7 @@ import UnsafeOpError from '../../errors/UnsafeOpError';
 import SearchTypeResolver from '../enums/SearchTypeResolver';
 import FileWriteError from '../../errors/FileWriteError';
 import FileRemoveError from '../../errors/FileRemoveError';
-import { CleanEmptyDirectories, EnsureDirectoryExistence } from './FsProviderUtils';
+import { _cleanEmptyDirectories, EnsureDirectoryExistence } from './FsProviderUtils';
 import { MkdirMode } from '../enums/MkdirMode';
 import EnumError from '../../errors/EnumError';
 
@@ -99,7 +99,7 @@ export default class FsProvider {
     public static CleanEmptyDirectories(directory: string, safety: boolean = FsProvider.CHECK_FILE_SAFETY): FileRemoveError | undefined {
         try {
             if (safety) FsProvider.IsPathSafe(directory);
-            CleanEmptyDirectories(directory);
+            _cleanEmptyDirectories(directory);
         } catch (e) {
             const err: Error = <Error>e;
             return new FileRemoveError('Failed to clean directory', err.message, null);

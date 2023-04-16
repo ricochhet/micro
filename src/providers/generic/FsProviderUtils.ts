@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 
-export function CleanEmptyDirectories(directory: string) {
+export function _cleanEmptyDirectories(directory: string) {
     const isDirectory: boolean = fs.statSync(directory).isDirectory();
 
     if (!isDirectory) return;
@@ -9,7 +9,7 @@ export function CleanEmptyDirectories(directory: string) {
     let files: string[] = fs.readdirSync(directory);
     if (files.length > 0) {
         files.forEach(file => {
-            CleanEmptyDirectories(path.join(directory, file));
+            _cleanEmptyDirectories(path.join(directory, file));
         });
 
         files = fs.readdirSync(directory);
