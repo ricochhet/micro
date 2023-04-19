@@ -1,8 +1,8 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
-import Array from './Array';
-import Command from './Command';
-export { Array, Command };
+import ArrayUtils from './ArrayUtils';
+import CommandUtils from './CommandUtils';
+export { ArrayUtils, CommandUtils };
 // MIT License
 // This file is a part of github.com/ricochhet/micro
 // Copyright (c) 2023 Jon

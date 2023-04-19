@@ -6,7 +6,7 @@ import FsProvider from '../providers/generic/FsProvider';
 import Logger from '../logger/Logger';
 import { LogType } from '../logger/enums/LogType';
 
-export const check_file_copyrights = (path: string, keywords: string[], ext: string) => {
+export const CheckFileCopyrights = (path: string, keywords: string[], ext: string) => {
     const files: string[] = FsProvider.GetPaths(SearchType.SearchAllFiles, path);
 
     for (const i in files) {

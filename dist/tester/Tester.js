@@ -1,7 +1,7 @@
 import Logger from '../logger/Logger';
 import { LogType } from '../logger/enums/LogType';
 import { StatusType } from './enum/StatusType';
-import ArrayUtils from '../utils/Array';
+import ArrayUtils from '../utils/ArrayUtils';
 class Tester {
     static _passes = 0;
     static _failures = 0;

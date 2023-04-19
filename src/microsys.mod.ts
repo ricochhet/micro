@@ -66,20 +66,20 @@ import * as microsys_tester_mod_ts from './tester/tester.mod';
 export { microsys_tester_mod_ts };
 import * as microsys_tester_ts from './tester/Tester';
 export { microsys_tester_ts };
-import * as microsys_check_file_copyrights_ts from './tools/check-file-copyrights';
-export { microsys_check_file_copyrights_ts };
-import * as microsys_import_gen_ts_ts from './tools/import-gen-ts';
-export { microsys_import_gen_ts_ts };
-import * as microsys_module_security_warning_ts from './tools/module-security-warning';
-export { microsys_module_security_warning_ts };
-import * as microsys_test_codegen_ts_ts from './tools/test-codegen-ts';
-export { microsys_test_codegen_ts_ts };
+import * as microsys_checkfilecopyrights_ts from './tools/CheckFileCopyrights';
+export { microsys_checkfilecopyrights_ts };
+import * as microsys_generatetypescriptimports_ts from './tools/GenerateTypescriptImports';
+export { microsys_generatetypescriptimports_ts };
+import * as microsys_modulesecuritywarning_ts from './tools/ModuleSecurityWarning';
+export { microsys_modulesecuritywarning_ts };
+import * as microsys_testercodeautogen_ts from './tools/TesterCodeAutoGen';
+export { microsys_testercodeautogen_ts };
 import * as microsys_tools_mod_ts from './tools/tools.mod';
 export { microsys_tools_mod_ts };
-import * as microsys_array_ts from './utils/Array';
-export { microsys_array_ts };
-import * as microsys_command_ts from './utils/Command';
-export { microsys_command_ts };
+import * as microsys_arrayutils_ts from './utils/ArrayUtils';
+export { microsys_arrayutils_ts };
+import * as microsys_commandutils_ts from './utils/CommandUtils';
+export { microsys_commandutils_ts };
 import * as microsys_utils_mod_ts from './utils/utils.mod';
 export { microsys_utils_mod_ts };
 import * as microsys_buildsystem_mod_ts from './web/buildsystem/buildsystem.mod';
@@ -145,4 +145,4 @@ export { microsys_web_mod_ts };
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-microsys_module_security_warning_ts.module_security_warning('microsys.mod.ts');
+microsys_modulesecuritywarning_ts.ModuleSecurityWarning('microsys.mod.ts');

@@ -1,8 +1,13 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
 
-import { CheckFileCopyrights } from './CheckFileCopyrights';
-export { CheckFileCopyrights };
+import Logger from '../logger/Logger';
+import { LogType } from '../logger/enums/LogType';
+
+export const ModuleSecurityWarning = (module: string): void => {
+    Logger.Log(LogType.INSECURE, `The module (${module}) you are using is insecure, and should only be used in development environments.`);
+    Logger.Log(LogType.INSECURE, `You take full responsibility for your actions and any damages that may be caused due to misuse.`);
+};
 
 // MIT License
 // This file is a part of github.com/ricochhet/micro

@@ -3,7 +3,7 @@
 
 import { Utils, Tools } from './micro.mod';
 Utils.CommandUtils.do(['--check-file-copyrights'], (params: string[]) => {
-    Tools.check_file_copyrights(params[1], params[2].split(','), params[3]);
+    Tools.CheckFileCopyrights(params[1], params[2].split(','), params[3]);
 });
 
 // MIT License

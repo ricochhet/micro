@@ -1,7 +1,7 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
-import { check_file_copyrights } from './check-file-copyrights';
-export { check_file_copyrights };
+import { CheckFileCopyrights } from './CheckFileCopyrights';
+export { CheckFileCopyrights };
 // MIT License
 // This file is a part of github.com/ricochhet/micro
 // Copyright (c) 2023 Jon

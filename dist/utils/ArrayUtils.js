@@ -1,9 +1,29 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
-
-import { CheckFileCopyrights } from './CheckFileCopyrights';
-export { CheckFileCopyrights };
-
+class ArrayUtils {
+    static Equals = (a, b) => {
+        if (!b) {
+            return false;
+        }
+        if (b === a)
+            return true;
+        if (a.length != b.length) {
+            return false;
+        }
+        for (var i = 0, l = a.length; i < l; i++) {
+            if (a[i] instanceof Array && b[i] instanceof Array) {
+                if (!ArrayUtils.Equals(a[i], b[i])) {
+                    return false;
+                }
+            }
+            else if (a[i] != b[i]) {
+                return false;
+            }
+        }
+        return true;
+    };
+}
+export default ArrayUtils;
 // MIT License
 // This file is a part of github.com/ricochhet/micro
 // Copyright (c) 2023 Jon

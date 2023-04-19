@@ -1,7 +1,7 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
-import { module_security_warning } from '../../tools/module-security-warning';
-module_security_warning('server');
+import { ModuleSecurityWarning } from '../../tools/ModuleSecurityWarning';
+ModuleSecurityWarning('server');
 
 import { parseUrl } from './parsers/Url';
 import { parseQuery } from './parsers/Query';

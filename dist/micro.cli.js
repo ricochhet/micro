@@ -1,8 +1,8 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
 import { Utils, Tools } from './micro.mod';
-Utils.Command.do(['--check-file-copyrights'], (params) => {
-    Tools.check_file_copyrights(params[1], params[2].split(','), params[3]);
+Utils.CommandUtils.do(['--check-file-copyrights'], (params) => {
+    Tools.CheckFileCopyrights(params[1], params[2].split(','), params[3]);
 });
 // MIT License
 // This file is a part of github.com/ricochhet/micro

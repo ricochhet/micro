@@ -1,8 +1,8 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
 
-import { module_security_warning } from './tools/module-security-warning';
-module_security_warning('micro.unsafe.ts');
+import { ModuleSecurityWarning } from './tools/ModuleSecurityWarning';
+ModuleSecurityWarning('micro.unsafe.ts');
 
 import Server from './web/server/server.mod';
 export { Server };
