@@ -1,11 +1,37 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
-import { CheckFileCopyrights } from './core/tools/CheckFileCopyrights';
-import { GenerateTypescriptImports } from './core/tools/GenerateTypescriptImports';
-// import { TesterCodeAutoGen } from './tools/TesterCodeAutoGen';
-CheckFileCopyrights('./src/', ['Copyright (c) 2023 Jon', 'MIT License', 'This file is a part of github.com/ricochhet/micro'], '.ts');
-GenerateTypescriptImports('./src/', './src/microsys.mod.ts');
-// TesterCodeAutoGen('./__tests__/test-codegen-ts-tests.ts');
+
+import { LogTypeHelper } from './enums/LogTypeHelper';
+import FsProvider from '../../core/providers/FsProvider';
+
+export default class Logger {
+    private static logList: string[] = [];
+    private static outLog: boolean = false;
+    private static outLogPath: string = '';
+
+    public static Options(_out: boolean, _path: string) {
+        this.outLog = _out;
+        this.outLogPath = _path;
+    }
+
+    public static async Log(type: string, error: string) {
+        Logger.logList.push(`${new Date().toLocaleDateString()} [${type}]: ${error}`);
+        Logger.Stdout(type, Logger.logList.slice(-1)[0]);
+
+        this.Write();
+    }
+
+    private static async Write() {
+        if (this.outLog && this.outLogPath && this.outLogPath.length !== 0) {
+            FsProvider.WriteFileSync(this.outLogPath, Logger.logList.join('\n'));
+        }
+    }
+
+    private static Stdout(type: string, message: string) {
+        process.stdout.write(`${LogTypeHelper.Color(type)}${message}\x1b[0m\n`);
+    }
+}
+
 // MIT License
 // This file is a part of github.com/ricochhet/micro
 // Copyright (c) 2023 Jon

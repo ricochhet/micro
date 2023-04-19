@@ -1,11 +1,19 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
-import { CheckFileCopyrights } from './core/tools/CheckFileCopyrights';
-import { GenerateTypescriptImports } from './core/tools/GenerateTypescriptImports';
-// import { TesterCodeAutoGen } from './tools/TesterCodeAutoGen';
-CheckFileCopyrights('./src/', ['Copyright (c) 2023 Jon', 'MIT License', 'This file is a part of github.com/ricochhet/micro'], '.ts');
-GenerateTypescriptImports('./src/', './src/microsys.mod.ts');
-// TesterCodeAutoGen('./__tests__/test-codegen-ts-tests.ts');
+import FsProvider from '../../../core/providers/FsProvider';
+export const json = (sourcePath) => {
+    return JSON.parse(FsProvider.ReadFileSync(sourcePath).toString());
+};
+export const preload = (listToLoadFrom) => {
+    const loadedItems = [];
+    for (const name in listToLoadFrom) {
+        loadedItems.push({
+            name: name,
+            data: FsProvider.ReadFileSync(listToLoadFrom[name]),
+        });
+    }
+    return loadedItems;
+};
 // MIT License
 // This file is a part of github.com/ricochhet/micro
 // Copyright (c) 2023 Jon

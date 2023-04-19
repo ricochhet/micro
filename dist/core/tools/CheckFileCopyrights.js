@@ -1,11 +1,24 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
-import { CheckFileCopyrights } from './core/tools/CheckFileCopyrights';
-import { GenerateTypescriptImports } from './core/tools/GenerateTypescriptImports';
-// import { TesterCodeAutoGen } from './tools/TesterCodeAutoGen';
-CheckFileCopyrights('./src/', ['Copyright (c) 2023 Jon', 'MIT License', 'This file is a part of github.com/ricochhet/micro'], '.ts');
-GenerateTypescriptImports('./src/', './src/microsys.mod.ts');
-// TesterCodeAutoGen('./__tests__/test-codegen-ts-tests.ts');
+import { SearchType } from '../providers/enums/SearchType';
+import FsProvider from '../providers/FsProvider';
+import Logger from '../../modules/logger/Logger';
+import { LogType } from '../../modules/logger/enums/LogType';
+export const CheckFileCopyrights = (path, keywords, ext) => {
+    const files = FsProvider.GetPaths(SearchType.SearchAllFiles, path);
+    for (const i in files) {
+        const file = files[i];
+        const data = FsProvider.ReadFileSync(file);
+        if (FsProvider.GetExtName(file) === ext) {
+            for (const keyword of keywords) {
+                if (!data.includes(keyword)) {
+                    Logger.Log(LogType.ERROR, `File missing copyright: ${file}`);
+                    break;
+                }
+            }
+        }
+    }
+};
 // MIT License
 // This file is a part of github.com/ricochhet/micro
 // Copyright (c) 2023 Jon

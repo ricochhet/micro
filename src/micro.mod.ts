@@ -1,15 +1,15 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
 
-import * as Errors from './errors/errors.mod';
-import * as Logger from './logger/Logger';
-import * as Providers from './providers/providers.mod';
-import * as Resolvers from './resolvers/resolvers.mod';
-import * as Tester from './tester/tester.mod';
-import * as Tools from './tools/tools.mod';
-import * as Utils from './utils/utils.mod';
-import * as Server from './server/server.mod';
-import * as Templater from './templater/templater.mod';
+import * as Errors from './core/errors/errors.mod';
+import * as Logger from './modules/logger/Logger';
+import * as Providers from './core/providers/providers.mod';
+import * as Resolvers from './core/resolvers/resolvers.mod';
+import * as Tester from './modules/tester/tester.mod';
+import * as Tools from './core/tools/tools.mod';
+import * as Utils from './core/utils/utils.mod';
+import * as Server from './modules/server/server.mod';
+import * as Templater from './modules/templater/templater.mod';
 export { Errors, Logger, Providers, Resolvers, Tester, Tools, Utils, Server, Templater };
 
 // MIT License
