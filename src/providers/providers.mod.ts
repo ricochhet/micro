@@ -1,9 +1,8 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
 
-import FsProvider from './generic/FsProvider';
-import * as FsProviderUtils from './generic/FsProviderUtils';
-export { FsProvider, FsProviderUtils };
+import FsProvider from './FsProvider';
+export { FsProvider };
 
 // MIT License
 // This file is a part of github.com/ricochhet/micro

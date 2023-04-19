@@ -1,6 +1,6 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
-import FsProvider from '../providers/generic/FsProvider';
+import FsProvider from '../providers/FsProvider';
 const testItemList = [
     { expect: 1, equal: 1 },
     { expect: 'equals-test', equal: 'equals-test', isString: true },

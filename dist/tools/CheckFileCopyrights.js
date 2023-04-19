@@ -1,7 +1,7 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
 import { SearchType } from '../providers/enums/SearchType';
-import FsProvider from '../providers/generic/FsProvider';
+import FsProvider from '../providers/FsProvider';
 import Logger from '../logger/Logger';
 import { LogType } from '../logger/enums/LogType';
 export const CheckFileCopyrights = (path, keywords, ext) => {

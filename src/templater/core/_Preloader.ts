@@ -2,7 +2,7 @@
 // See end of file for extended copyright information.
 
 import { IData, ISettings } from '../interfaces/ISettings';
-import FsProvider from '../../providers/generic/FsProvider';
+import FsProvider from '../../providers/FsProvider';
 
 export const json = (sourcePath: string): ISettings => {
     return JSON.parse(FsProvider.ReadFileSync(sourcePath).toString());

@@ -2,7 +2,7 @@
 // See end of file for extended copyright information.
 
 import { LogTypeHelper } from './enums/LogTypeHelper';
-import FsProvider from '../providers/generic/FsProvider';
+import FsProvider from '../providers/FsProvider';
 
 export default class Logger {
     private static logList: string[] = [];

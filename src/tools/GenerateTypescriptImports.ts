@@ -2,7 +2,7 @@
 // See end of file for extended copyright information.
 
 import { SearchType } from '../providers/enums/SearchType';
-import FsProvider from '../providers/generic/FsProvider';
+import FsProvider from '../providers/FsProvider';
 
 export const GenerateTypescriptImports = (path: string, out: string) => {
     const files: string[] = FsProvider.GetPaths(SearchType.SearchAllFiles, path);
@@ -29,7 +29,6 @@ export const GenerateTypescriptImports = (path: string, out: string) => {
     }
 
     generatedScript.push('\n' + FsProvider.ReadFileSync('./src/tools/license-parts/LicenseFooter.md'));
-    generatedScript.push('\n' + `microsys_modulesecuritywarning_ts.ModuleSecurityWarning("microsys.mod.ts")`);
     FsProvider.WriteFileSync(out, generatedScript.join('\n'));
 };
 

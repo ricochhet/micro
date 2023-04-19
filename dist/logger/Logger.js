@@ -1,7 +1,7 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
 import { LogTypeHelper } from './enums/LogTypeHelper';
-import FsProvider from '../providers/generic/FsProvider';
+import FsProvider from '../providers/FsProvider';
 class Logger {
     static logList = [];
     static outLog = false;

@@ -5,7 +5,7 @@ import { json, preload } from './core/_Preloader';
 import { generateTemplates } from './core/TemplateBuilder';
 import { generateComponents } from './core/ComponentBuilder';
 import { IBuildData, IData, ISettings, IStagingData, ITemplate } from './interfaces/ISettings';
-import FsProvider from '../providers/generic/FsProvider';
+import FsProvider from '../providers/FsProvider';
 
 export default class BuildSystem {
     private static buffer: ISettings;

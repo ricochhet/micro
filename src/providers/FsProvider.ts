@@ -3,17 +3,15 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
-import { SearchType } from '../enums/SearchType';
-import FileReadError from '../../errors/FileReadError';
-import FileCopyError from '../../errors/FileCopyError';
-import UnsafeOpError from '../../errors/UnsafeOpError';
-import SearchTypeResolver from '../enums/SearchTypeResolver';
-import FileWriteError from '../../errors/FileWriteError';
-import FileRemoveError from '../../errors/FileRemoveError';
-import { _cleanEmptyDirectories, _copyDirectory, EnsureDirectoryExistence } from './FsProviderUtils';
-import { MkdirMode } from '../enums/MkdirMode';
-import EnumError from '../../errors/EnumError';
-import BaseError from '../../errors/BaseError';
+import { SearchType } from './enums/SearchType';
+import FileReadError from '../errors/FileReadError';
+import FileCopyError from '../errors/FileCopyError';
+import UnsafeOpError from '../errors/UnsafeOpError';
+import FileWriteError from '../errors/FileWriteError';
+import FileRemoveError from '../errors/FileRemoveError';
+import { MkdirMode } from './enums/MkdirMode';
+import EnumError from '../errors/EnumError';
+import BaseError from '../errors/BaseError';
 
 export default class FsProvider {
     private static CHECK_FILE_SAFETY: boolean = true;
@@ -114,7 +112,7 @@ export default class FsProvider {
     public static EnsureDirectory(directory: string, safety: boolean = FsProvider.CHECK_FILE_SAFETY): FileWriteError | undefined {
         try {
             if (safety) FsProvider.IsPathSafe(directory);
-            EnsureDirectoryExistence(directory);
+            this._ensureDirectory(directory);
         } catch (e) {
             const err: Error = <Error>e;
             return new FileWriteError('Failed to ensure directory', err.message, null);
@@ -124,7 +122,7 @@ export default class FsProvider {
     public static CleanEmptyDirectories(directory: string, safety: boolean = FsProvider.CHECK_FILE_SAFETY): FileRemoveError | undefined {
         try {
             if (safety) FsProvider.IsPathSafe(directory);
-            _cleanEmptyDirectories(directory);
+            FsProvider._cleanEmptyDirectories(directory);
         } catch (e) {
             const err: Error = <Error>e;
             return new FileRemoveError('Failed to clean directory', err.message, null);
@@ -134,7 +132,7 @@ export default class FsProvider {
     public static CopyDirectory(src: string, dest: string, safety: boolean = FsProvider.CHECK_FILE_SAFETY): FileCopyError | undefined {
         try {
             if (safety) FsProvider.IsPathSafe(src) && FsProvider.IsPathSafe(dest);
-            _copyDirectory(src, dest);
+            FsProvider._copyDirectory(src, dest);
         } catch (e) {
             const err: Error = <Error>e;
             return new FileCopyError('Failed to copy directory', err.message, null);
@@ -148,7 +146,101 @@ export default class FsProvider {
 
     public static GetPaths(type: SearchType, directory: string, safety: boolean = FsProvider.CHECK_FILE_SAFETY): string[] {
         if (safety) FsProvider.IsPathSafe(directory);
-        return SearchTypeResolver(type, directory);
+        switch (type) {
+            case SearchType.TopFilesOnly:
+                return FsProvider._getFiles(directory);
+            case SearchType.SearchAllFiles:
+                return FsProvider._walkDirectory(directory);
+            case SearchType.TopDirectoriesOnly:
+                return FsProvider._getDirectories(directory);
+            case SearchType.SearchAllDirectories:
+                return FsProvider._getDirectoriesRecursively(directory);
+            default:
+                throw new EnumError('SearchType', 'default');
+        }
+    }
+
+    private static _ensureDirectory(filePath: string) {
+        const directoryName: string = path.dirname(filePath);
+
+        if (fs.existsSync(directoryName)) {
+            return true;
+        }
+
+        FsProvider._ensureDirectory(directoryName);
+        fs.mkdirSync(directoryName);
+    }
+
+    private static _cleanEmptyDirectories(directory: string) {
+        const isDirectory: boolean = fs.statSync(directory).isDirectory();
+
+        if (!isDirectory) return;
+
+        let files: string[] = fs.readdirSync(directory);
+        if (files.length > 0) {
+            files.forEach(file => {
+                FsProvider._cleanEmptyDirectories(path.join(directory, file));
+            });
+
+            files = fs.readdirSync(directory);
+        }
+
+        if (files.length == 0) {
+            fs.rmdirSync(directory);
+            return;
+        }
+    }
+
+    private static _copyDirectory(src: string, dest: string) {
+        fs.mkdirSync(dest, { recursive: true });
+        const entries = fs.readdirSync(src, { withFileTypes: true });
+
+        for (let entry of entries) {
+            const srcPath = path.join(src, entry.name);
+            const destPath = path.join(dest, entry.name);
+
+            entry.isDirectory() ? FsProvider._copyDirectory(srcPath, destPath) : fs.copyFileSync(srcPath, destPath);
+        }
+    }
+
+    private static _getDirectories(directory: string): string[] {
+        return fs
+            .readdirSync(directory)
+            .map(i => path.join(directory, i))
+            .filter(x => fs.statSync(x).isDirectory());
+    }
+
+    private static _getDirectoriesRecursively(directory: string): string[] {
+        return [directory, ...FsProvider._getDirectories(directory).map(FsProvider._getDirectoriesRecursively)].flat();
+    }
+
+    private static _walkDirectory(directory: string): string[] {
+        const files: string[] = [];
+
+        for (const file of FsProvider._walkDirectoryGenerator(directory)) {
+            files.push(<string>file);
+        }
+
+        return files;
+    }
+
+    private static _getFiles(directory: string): string[] {
+        return fs
+            .readdirSync(directory)
+            .map(i => path.join(directory, i))
+            .filter(x => fs.statSync(x).isFile());
+    }
+
+    private static *_walkDirectoryGenerator(directory: string): Generator {
+        const files = fs.readdirSync(directory, { withFileTypes: true });
+
+        for (const file of files) {
+            if (file.isDirectory()) {
+                yield* FsProvider._walkDirectoryGenerator(path.join(directory, file.name));
+            } else {
+                yield path.join(directory, file.name);
+            }
+        }
     }
 }
 

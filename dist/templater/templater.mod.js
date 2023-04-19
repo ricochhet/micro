@@ -3,7 +3,7 @@
 import { json, preload } from './core/_Preloader';
 import { generateTemplates } from './core/TemplateBuilder';
 import { generateComponents } from './core/ComponentBuilder';
-import FsProvider from '../providers/generic/FsProvider';
+import FsProvider from '../providers/FsProvider';
 class BuildSystem {
     static buffer;
     static templates = [];
