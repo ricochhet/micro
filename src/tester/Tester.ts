@@ -2,7 +2,7 @@ import Logger from '../logger/Logger';
 import { LogType } from '../logger/enums/LogType';
 import { IExpect } from './interfaces/IExpect';
 import { StatusType } from './enum/StatusType';
-import ArrayUtils from '../utils/Array';
+import ArrayUtils from '../utils/ArrayUtils';
 
 export default class Tester {
     private static _passes: number = 0;

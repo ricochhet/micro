@@ -2,7 +2,7 @@
 // See end of file for extended copyright information.
 
 import { Utils, Tools } from './micro.mod';
-Utils.Command.do(['--check-file-copyrights'], (params: string[]) => {
+Utils.CommandUtils.do(['--check-file-copyrights'], (params: string[]) => {
     Tools.check_file_copyrights(params[1], params[2].split(','), params[3]);
 });
 

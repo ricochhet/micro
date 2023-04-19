@@ -2,6 +2,7 @@
 // See end of file for extended copyright information.
 
 export default class ArrayUtils {
+
     public static Equals = (a: Array<any>, b: Array<any>): boolean => {
         if (!b) {
             return false;
