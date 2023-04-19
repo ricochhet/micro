@@ -70,6 +70,8 @@ import * as microsys_import_gen_ts_ts from "./tools/import-gen-ts";
 export { microsys_import_gen_ts_ts };
 import * as microsys_module_security_warning_ts from "./tools/module-security-warning";
 export { microsys_module_security_warning_ts };
+import * as microsys_test_codegen_ts_ts from "./tools/test-codegen-ts";
+export { microsys_test_codegen_ts_ts };
 import * as microsys_tools_mod_ts from "./tools/tools.mod";
 export { microsys_tools_mod_ts };
 import * as microsys_array_ts from "./utils/Array";

@@ -3,9 +3,11 @@
 
 import { check_file_copyrights } from './tools/check-file-copyrights';
 import { import_gen_ts } from './tools/import-gen-ts';
+import { test_codegen } from './tools/test-codegen-ts';
 
 check_file_copyrights('./src/', ['Copyright (c) 2023 Jon', 'MIT License', 'This file is a part of github.com/ricochhet/micro'], '.ts');
 import_gen_ts('./src/', './src/microsys.mod.ts');
+test_codegen('./__tests__/test-codegen-ts-tests.ts');
 
 // MIT License
 // This file is a part of github.com/ricochhet/micro
