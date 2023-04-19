@@ -2,6 +2,8 @@
 // ------------<import-gen-ts.ts>------------ //
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
+import * as microsys_checks_ts from "./checks";
+export { microsys_checks_ts };
 import * as microsys_baseerror_ts from "./core/errors/BaseError";
 export { microsys_baseerror_ts };
 import * as microsys_enumerror_ts from "./core/errors/EnumError";
@@ -50,14 +52,14 @@ import * as microsys_utils_mod_ts from "./core/utils/utils.mod";
 export { microsys_utils_mod_ts };
 import * as microsys_workerutils_ts from "./core/utils/WorkerUtils";
 export { microsys_workerutils_ts };
-import * as microsys_micro_checks_ts from "./micro.checks";
-export { microsys_micro_checks_ts };
+import * as microsys_micro_auto_ts from "./micro.auto";
+export { microsys_micro_auto_ts };
 import * as microsys_micro_cli_ts from "./micro.cli";
 export { microsys_micro_cli_ts };
-import * as microsys_micro_mod_ts from "./micro.mod";
-export { microsys_micro_mod_ts };
-import * as microsys_microsys_mod_ts from "./microsys.mod";
-export { microsys_microsys_mod_ts };
+import * as microsys_micro_core_ts from "./micro.core";
+export { microsys_micro_core_ts };
+import * as microsys_micro_modules_ts from "./micro.modules";
+export { microsys_micro_modules_ts };
 import * as microsys_logtype_ts from "./modules/logger/enums/LogType";
 export { microsys_logtype_ts };
 import * as microsys_logtypehelper_ts from "./modules/logger/enums/LogTypeHelper";

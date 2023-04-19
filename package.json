@@ -2,10 +2,10 @@
     "name": "micro",
     "version": "1.0.0",
     "description": "small zero-dependency tools, frameworks and libraries that I used for personal projects.",
-    "main": "./dist/micro.mod.js",
+    "main": "./dist/micro.cli.js",
     "scripts": {
-        "checks": "ts-node ./src/micro.checks.ts && echo [micro-npm] done",
-        "build": "tsc ./src/micro.mod.ts ./src/micro.checks.ts ./src/microsys.mod.ts --outDir dist --target es2022 && echo [micro-npm] done",
+        "checks": "ts-node ./src/checks.ts && echo [micro-npm] done",
+        "build": "tsc ./src/micro.core.ts ./src/micro.modules.ts ./src/checks.ts ./src/micro.auto.ts --outDir dist --target es2022 && echo [micro-npm] done",
         "prettier": "prettier --config .prettierrc --write ./src/ && echo [micro-npm] done",
         "deploy": "npm run checks && npm run build && npm run prettier",
         "prettier:check": "prettier --config .prettierrc --check ./src/  && echo [micro-npm] done",

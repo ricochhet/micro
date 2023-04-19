@@ -1,11 +1,13 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
-import { CheckFileCopyrights } from './core/tools/CheckFileCopyrights';
-import { GenerateTypescriptImports } from './core/tools/GenerateTypescriptImports';
-// import { TesterCodeAutoGen } from './tools/TesterCodeAutoGen';
-CheckFileCopyrights('./src/', ['Copyright (c) 2023 Jon', 'MIT License', 'This file is a part of github.com/ricochhet/micro'], '.ts');
-GenerateTypescriptImports('./src/', './src/microsys.mod.ts');
-// TesterCodeAutoGen('./__tests__/test-codegen-ts-tests.ts');
+
+import * as Errors from './core/errors/errors.mod';
+import * as Providers from './core/providers/providers.mod';
+import * as Resolvers from './core/resolvers/resolvers.mod';
+import * as Tools from './core/tools/tools.mod';
+import * as Utils from './core/utils/utils.mod';
+export { Errors, Providers, Resolvers, Tools, Utils };
+
 // MIT License
 // This file is a part of github.com/ricochhet/micro
 // Copyright (c) 2023 Jon

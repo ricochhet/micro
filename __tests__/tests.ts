@@ -1,8 +1,8 @@
 // Probably contains numerous repeated tests, most things have been copy pasted. :)
-import Logger from '../src/logger/Logger';
-import { LogType } from '../src/logger/enums/LogType';
-import Tester from '../src/tester/Tester';
-import { StatusType } from '../src/tester/enum/StatusType';
+import Logger from '../src/modules/logger/Logger';
+import { LogType } from '../src/modules/logger/enums/LogType';
+import Tester from '../src/modules/tester/Tester';
+import { StatusType } from '../src/modules/tester/enum/StatusType';
 
 Logger.Log(LogType.WARN, '-------------BLOCK 1------------');
 Tester.assert('expect (100 === 200) should equal FAILURE', expect => {

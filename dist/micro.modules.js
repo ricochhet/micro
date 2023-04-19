@@ -1,14 +1,10 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
-
-import { CheckFileCopyrights } from './core/tools/CheckFileCopyrights';
-import { GenerateTypescriptImports } from './core/tools/GenerateTypescriptImports';
-// import { TesterCodeAutoGen } from './tools/TesterCodeAutoGen';
-
-CheckFileCopyrights('./src/', ['Copyright (c) 2023 Jon', 'MIT License', 'This file is a part of github.com/ricochhet/micro'], '.ts');
-GenerateTypescriptImports('./src/', './src/microsys.mod.ts');
-// TesterCodeAutoGen('./__tests__/test-codegen-ts-tests.ts');
-
+import * as Logger from './modules/logger/Logger';
+import * as Tester from './modules/tester/tester.mod';
+import * as Server from './modules/server/server.mod';
+import * as Templater from './modules/templater/templater.mod';
+export { Logger, Tester, Server, Templater };
 // MIT License
 // This file is a part of github.com/ricochhet/micro
 // Copyright (c) 2023 Jon

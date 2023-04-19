@@ -1,11 +1,11 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
-
-import { Utils, Tools } from './micro.core';
-Utils.CommandUtils.do(['--check-file-copyrights'], (params: string[]) => {
-    Tools.CheckFileCopyrights(params[1], params[2].split(','), params[3]);
-});
-
+import { CheckFileCopyrights } from './core/tools/CheckFileCopyrights';
+import { GenerateTypescriptImports } from './core/tools/GenerateTypescriptImports';
+// import { TesterCodeAutoGen } from './tools/TesterCodeAutoGen';
+CheckFileCopyrights('./src/', ['Copyright (c) 2023 Jon', 'MIT License', 'This file is a part of github.com/ricochhet/micro'], '.ts');
+GenerateTypescriptImports('./src/', './src/micro.auto.ts');
+// TesterCodeAutoGen('./__tests__/test-codegen-ts-tests.ts');
 // MIT License
 // This file is a part of github.com/ricochhet/micro
 // Copyright (c) 2023 Jon

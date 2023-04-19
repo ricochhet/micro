@@ -1,10 +1,11 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
 
-import { Utils, Tools } from './micro.core';
-Utils.CommandUtils.do(['--check-file-copyrights'], (params: string[]) => {
-    Tools.CheckFileCopyrights(params[1], params[2].split(','), params[3]);
-});
+import * as Logger from './modules/logger/Logger';
+import * as Tester from './modules/tester/tester.mod';
+import * as Server from './modules/server/server.mod';
+import * as Templater from './modules/templater/templater.mod';
+export { Logger, Tester, Server, Templater };
 
 // MIT License
 // This file is a part of github.com/ricochhet/micro
