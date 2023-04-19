@@ -3,11 +3,11 @@
 
 import { CheckFileCopyrights } from './tools/CheckFileCopyrights';
 import { GenerateTypescriptImports } from './tools/GenerateTypescriptImports';
-import { TesterCodeAutoGen } from './tools/TesterCodeAutoGen';
+// import { TesterCodeAutoGen } from './tools/TesterCodeAutoGen';
 
 CheckFileCopyrights('./src/', ['Copyright (c) 2023 Jon', 'MIT License', 'This file is a part of github.com/ricochhet/micro'], '.ts');
 GenerateTypescriptImports('./src/', './src/microsys.mod.ts');
-TesterCodeAutoGen('./__tests__/test-codegen-ts-tests.ts');
+// TesterCodeAutoGen('./__tests__/test-codegen-ts-tests.ts');
 
 // MIT License
 // This file is a part of github.com/ricochhet/micro
