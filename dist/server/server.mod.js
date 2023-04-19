@@ -1,114 +1,96 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
-import { ModuleSecurityWarning } from '../../tools/ModuleSecurityWarning';
+import { ModuleSecurityWarning } from '../tools/ModuleSecurityWarning';
 ModuleSecurityWarning('server');
-
 import { parseUrl } from './parsers/Url';
 import { parseQuery } from './parsers/Query';
-import { createServer, IncomingMessage, ServerResponse } from 'http';
-
+import { createServer } from 'http';
 import { readBody } from './components/Body';
 import { createResponse } from './components/Response';
 import { processMiddleware } from './components/Middleware';
-import { IMessage } from './interfaces/IMessage';
-import { Callback, Middleware } from './types/MiddlewareTypes';
-import Logger from '../../logger/Logger';
-import { LogType } from '../../logger/enums/LogType';
-
-declare module 'http' {
-    interface IncomingMessage extends IMessage {}
-}
-
+import Logger from '../logger/Logger';
+import { LogType } from '../logger/enums/LogType';
 export default function service() {
-    const routeTable: any = {};
-
-    const server = createServer(async (req: IncomingMessage, res: ServerResponse) => {
-        const routes: string[] = Object.keys(routeTable);
-        let match: boolean = false;
-
+    const routeTable = {};
+    const server = createServer(async (req, res) => {
+        const routes = Object.keys(routeTable);
+        let match = false;
         for (let i = 0; i < routes.length; i++) {
-            const route: string = routes[i];
-            const parsedRoute: string = parseUrl(route);
-
+            const route = routes[i];
+            const parsedRoute = parseUrl(route);
             if (new RegExp(parsedRoute).test(req.url ?? '') && routeTable[route][req.method?.toLowerCase() ?? '']) {
-                let cb: Callback = routeTable[route][req.method?.toLowerCase() ?? ''];
-                let middleware: Middleware = routeTable[route][`${req.method?.toLowerCase()}-middleware`];
-                const m: RegExpMatchArray | null | undefined = req.url?.match(new RegExp(parsedRoute));
-
+                let cb = routeTable[route][req.method?.toLowerCase() ?? ''];
+                let middleware = routeTable[route][`${req.method?.toLowerCase()}-middleware`];
+                const m = req.url?.match(new RegExp(parsedRoute));
                 req.params = m?.groups ?? {};
                 req.query = parseQuery(req.url ?? '');
                 req.body = await readBody(req);
-
                 const result = await processMiddleware(middleware, req, createResponse(res));
-
                 if (result) {
                     cb(req, res);
                 }
-
                 match = true;
                 break;
             }
         }
-
         if (!match) {
             res.statusCode = 404;
             res.end('Not Found');
         }
     });
-
-    function registerPath(path: string, cb: Function, method: string, middleware?: Function | null) {
+    function registerPath(path, cb, method, middleware) {
         if (!routeTable[path]) {
             routeTable[path] = {};
         }
-
         routeTable[path] = {
             ...routeTable[path],
             [method]: cb,
             [method + '-middleware']: middleware,
         };
     }
-
     return {
-        get: (path: string, ...rest: [Function] | [Middleware, Function]) => {
+        get: (path, ...rest) => {
             if (rest.length === 1) {
                 registerPath(path, rest[0], 'get');
-            } else {
+            }
+            else {
                 registerPath(path, rest[1], 'get', rest[0]);
             }
         },
-        post: (path: string, ...rest: [Function] | [Middleware, Function]) => {
+        post: (path, ...rest) => {
             if (rest.length === 1) {
                 registerPath(path, rest[0], 'post');
-            } else {
+            }
+            else {
                 registerPath(path, rest[1], 'post', rest[0]);
             }
         },
-        put: (path: string, ...rest: [Function] | [Middleware, Function]) => {
+        put: (path, ...rest) => {
             if (rest.length === 1) {
                 registerPath(path, rest[0], 'put');
-            } else {
+            }
+            else {
                 registerPath(path, rest[1], 'put', rest[0]);
             }
         },
-        delete: (path: string, ...rest: [Function] | [Middleware, Function]) => {
+        delete: (path, ...rest) => {
             if (rest.length === 1) {
                 registerPath(path, rest[0], 'delete');
-            } else {
+            }
+            else {
                 registerPath(path, rest[1], 'delete', rest[0]);
             }
         },
-        listen: (port: number, cb?: () => void | null) => {
+        listen: (port, cb) => {
             server.listen(port, cb);
-
             return {
-                message: (message: string) => {
+                message: (message) => {
                     Logger.Log(LogType.INFO, message);
                 },
             };
         },
     };
 }
-
 // MIT License
 // This file is a part of github.com/ricochhet/micro
 // Copyright (c) 2023 Jon

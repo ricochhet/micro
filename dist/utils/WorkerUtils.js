@@ -1,9 +1,36 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
-import { ModuleSecurityWarning } from './tools/ModuleSecurityWarning';
-ModuleSecurityWarning('micro.unsafe.ts');
-import Server from './server/server.mod';
-export { Server };
+import clust from 'cluster';
+import { cpus } from 'os';
+import Logger from '../logger/Logger';
+import { LogType } from '../logger/enums/LogType';
+export default class WorkerUtils {
+    static Create(handler, callback) {
+        const numCPUs = cpus().length;
+        if (clust.isPrimary) {
+            Logger.Log(LogType.INFO, `Primary ${process.pid} is running`);
+            for (let i = 0; i < numCPUs; i++) {
+                clust.fork();
+            }
+            clust.on('exit', (worker, code, signal) => {
+                if (signal) {
+                    Logger.Log(LogType.INFO, `Worker ${worker.process.pid} was killed by signal: ${signal}`);
+                }
+                else if (code !== 0) {
+                    Logger.Log(LogType.INFO, `Worker ${worker.process.pid} exited with error code: ${code}`);
+                }
+                else {
+                    Logger.Log(LogType.INFO, `Worker ${worker.process.pid} success`);
+                }
+            });
+            callback(process.pid, process);
+        }
+        else {
+            handler(process.pid, process);
+            Logger.Log(LogType.INFO, `Worker ${process.pid} started`);
+        }
+    }
+}
 // MIT License
 // This file is a part of github.com/ricochhet/micro
 // Copyright (c) 2023 Jon

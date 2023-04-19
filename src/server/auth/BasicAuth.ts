@@ -2,8 +2,7 @@
 // See end of file for extended copyright information.
 
 import { IncomingMessage, ServerResponse } from 'http';
-import { timeSafeCompare } from '../utils/Compare';
-import { Sha256 } from '../crypto/Sha256';
+import CryptoUtils from '../../utils/CryptoUtils';
 import { BasicAuthHandlerTable } from '../types/BasicAuthTypes';
 import { Default } from '../types/MiddlewareTypes';
 
@@ -25,7 +24,7 @@ export default class BasicAuth {
         if (!userPass) return null;
 
         if (typeof middleware !== 'function') return null;
-        if (!userPass || !this.handler(Sha256(userPass[1]), Sha256(userPass[2]), basicAuthHandlerTable)) {
+        if (!userPass || !this.handler(CryptoUtils.Sha256(userPass[1]), CryptoUtils.Sha256(userPass[2]), basicAuthHandlerTable)) {
             res.statusCode = 401;
             res.setHeader('WWW-Authenticate', 'Basic realm="realm"');
             res.end('Unauthorized');
@@ -37,8 +36,8 @@ export default class BasicAuth {
     public static handler(user: string, pass: string, basicAuthHandlerTable: BasicAuthHandlerTable | null): boolean | null {
         if (basicAuthHandlerTable) {
             for (const i in basicAuthHandlerTable) {
-                const compareUser: boolean = timeSafeCompare(user, basicAuthHandlerTable[i]['user']);
-                const comparePass: boolean = timeSafeCompare(pass, basicAuthHandlerTable[i]['pass']);
+                const compareUser: boolean = CryptoUtils.Compare(user, basicAuthHandlerTable[i]['user']);
+                const comparePass: boolean = CryptoUtils.Compare(pass, basicAuthHandlerTable[i]['pass']);
 
                 if (compareUser && comparePass) {
                     return true;

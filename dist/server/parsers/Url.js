@@ -1,9 +1,29 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
-import { ModuleSecurityWarning } from './tools/ModuleSecurityWarning';
-ModuleSecurityWarning('micro.unsafe.ts');
-import Server from './server/server.mod';
-export { Server };
+export const parseUrl = (url) => {
+    let str = '';
+    for (let i = 0; i < url.length; i++) {
+        const c = url.charAt(i);
+        if (c === ':') {
+            let param = '';
+            let j = i + 1;
+            for (; j < url.length; j++) {
+                if (/\w/.test(url.charAt(j))) {
+                    param += url.charAt(j);
+                }
+                else {
+                    break;
+                }
+            }
+            str += `(?<${param}>\\w+)`;
+            i = j - 1;
+        }
+        else {
+            str += c;
+        }
+    }
+    return str;
+};
 // MIT License
 // This file is a part of github.com/ricochhet/micro
 // Copyright (c) 2023 Jon

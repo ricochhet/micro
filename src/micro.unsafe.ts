@@ -4,7 +4,7 @@
 import { ModuleSecurityWarning } from './tools/ModuleSecurityWarning';
 ModuleSecurityWarning('micro.unsafe.ts');
 
-import Server from './web/server/server.mod';
+import Server from './server/server.mod';
 export { Server };
 
 // MIT License

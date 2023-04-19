@@ -8,8 +8,9 @@ import * as Resolvers from './resolvers/resolvers.mod';
 import * as Tester from './tester/tester.mod';
 import * as Tools from './tools/tools.mod';
 import * as Utils from './utils/utils.mod';
-import * as Web from './web/web.mod';
-export { Errors, Logger, Providers, Resolvers, Tester, Tools, Utils, Web };
+import * as Server from './server/server.mod';
+import * as Templater from './templater/templater.mod';
+export { Errors, Logger, Providers, Resolvers, Tester, Tools, Utils, Server, Templater };
 
 // MIT License
 // This file is a part of github.com/ricochhet/micro

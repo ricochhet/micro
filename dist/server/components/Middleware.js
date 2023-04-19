@@ -1,40 +1,15 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
-
-import clust, { Worker } from 'cluster';
-import { cpus } from 'os';
-import Logger from '../../../logger/Logger';
-import { LogType } from '../../../logger/enums/LogType';
-
-type HandlerCallback = (pid: number, process: NodeJS.Process) => void;
-
-export default function cluster(handler: (pid: number, process: NodeJS.Process) => void, callback: HandlerCallback): void {
-    const numCPUs = cpus().length;
-
-    if (clust.isPrimary) {
-        Logger.Log(LogType.INFO, `Primary ${process.pid} is running`);
-
-        for (let i = 0; i < numCPUs; i++) {
-            clust.fork();
-        }
-
-        clust.on('exit', (worker: Worker, code: number, signal: string) => {
-            if (signal) {
-                Logger.Log(LogType.INFO, `Worker ${worker.process.pid} was killed by signal: ${signal}`);
-            } else if (code !== 0) {
-                Logger.Log(LogType.INFO, `Worker ${worker.process.pid} exited with error code: ${code}`);
-            } else {
-                Logger.Log(LogType.INFO, `Worker ${worker.process.pid} success`);
-            }
-        });
-
-        callback(process.pid, process);
-    } else {
-        handler(process.pid, process);
-        Logger.Log(LogType.INFO, `Worker ${process.pid} started`);
+export const processMiddleware = (middleware, req, res) => {
+    if (!middleware) {
+        return new Promise(resolve => resolve(true));
     }
-}
-
+    return new Promise(resolve => {
+        middleware(req, res, function () {
+            resolve(true);
+        });
+    });
+};
 // MIT License
 // This file is a part of github.com/ricochhet/micro
 // Copyright (c) 2023 Jon

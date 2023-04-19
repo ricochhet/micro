@@ -1,9 +1,41 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
-import { ModuleSecurityWarning } from './tools/ModuleSecurityWarning';
-ModuleSecurityWarning('micro.unsafe.ts');
-import Server from './server/server.mod';
-export { Server };
+
+import * as crypto from 'crypto';
+
+export default class CryptoUtils {
+    private static bufferEqual(a: Buffer, b: Buffer) {
+        if (a.length !== b.length) {
+            return false;
+        }
+
+        if (crypto.timingSafeEqual) {
+            return crypto.timingSafeEqual(a, b);
+        }
+
+        for (let i = 0; i < a.length; i++) {
+            if (a[i] !== b[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static Compare = (a: string, b: string): boolean => {
+        const sa: string = String(a);
+        const sb: string = String(b);
+        const key: Buffer = crypto.randomBytes(32);
+        const ah: Buffer = crypto.createHmac('sha256', key).update(sa).digest();
+        const bh: Buffer = crypto.createHmac('sha256', key).update(sb).digest();
+
+        return CryptoUtils.bufferEqual(ah, bh) && a === b;
+    };
+
+    public static Sha256(data: string) {
+        return crypto.createHash('sha256').update(data).digest('hex');
+    }
+}
+
 // MIT License
 // This file is a part of github.com/ricochhet/micro
 // Copyright (c) 2023 Jon

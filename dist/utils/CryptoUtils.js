@@ -1,35 +1,36 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
-
 import * as crypto from 'crypto';
-
-const bufferEqual = (a: Buffer, b: Buffer) => {
-    if (a.length !== b.length) {
-        return false;
-    }
-
-    if (crypto.timingSafeEqual) {
-        return crypto.timingSafeEqual(a, b);
-    }
-
-    for (let i = 0; i < a.length; i++) {
-        if (a[i] !== b[i]) {
+class CryptoUtils {
+    static bufferEqual(a, b) {
+        if (a.length !== b.length) {
             return false;
         }
+        if (crypto.timingSafeEqual) {
+            return crypto.timingSafeEqual(a, b);
+        }
+        for (let i = 0; i < a.length; i++) {
+            if (a[i] !== b[i]) {
+                return false;
+            }
+        }
+        return true;
     }
-    return true;
-};
-
-export const timeSafeCompare = (a: string, b: string): boolean => {
-    const sa: string = String(a);
-    const sb: string = String(b);
-    const key: Buffer = crypto.randomBytes(32);
-    const ah: Buffer = crypto.createHmac('sha256', key).update(sa).digest();
-    const bh: Buffer = crypto.createHmac('sha256', key).update(sb).digest();
-
-    return bufferEqual(ah, bh) && a === b;
-};
-
+    ;
+    static Compare = (a, b) => {
+        const sa = String(a);
+        const sb = String(b);
+        const key = crypto.randomBytes(32);
+        const ah = crypto.createHmac('sha256', key).update(sa).digest();
+        const bh = crypto.createHmac('sha256', key).update(sb).digest();
+        return CryptoUtils.bufferEqual(ah, bh) && a === b;
+    };
+    static Sha256(data) {
+        return crypto.createHash('sha256').update(data).digest('hex');
+    }
+    ;
+}
+export default CryptoUtils;
 // MIT License
 // This file is a part of github.com/ricochhet/micro
 // Copyright (c) 2023 Jon

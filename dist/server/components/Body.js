@@ -1,26 +1,19 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
-
-import { IData, ISettings } from '../interfaces/ISettings';
-import FsProvider from '../../../providers/generic/FsProvider';
-
-export const json = (sourcePath: string): ISettings => {
-    return JSON.parse(FsProvider.ReadFileSync(sourcePath).toString());
-};
-
-export const preload = (listToLoadFrom: Array<string>): Array<IData> => {
-    const loadedItems: Array<IData> = [];
-
-    for (const name in listToLoadFrom) {
-        loadedItems.push({
-            name: name,
-            data: FsProvider.ReadFileSync(listToLoadFrom[name]),
+export const readBody = (req) => {
+    return new Promise((resolve, reject) => {
+        let body = '';
+        req.on('data', chunk => {
+            body += '' + chunk;
         });
-    }
-
-    return loadedItems;
+        req.on('end', () => {
+            resolve(body);
+        });
+        req.on('error', err => {
+            reject(err);
+        });
+    });
 };
-
 // MIT License
 // This file is a part of github.com/ricochhet/micro
 // Copyright (c) 2023 Jon

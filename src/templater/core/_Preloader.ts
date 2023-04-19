@@ -1,9 +1,26 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
-import { ModuleSecurityWarning } from './tools/ModuleSecurityWarning';
-ModuleSecurityWarning('micro.unsafe.ts');
-import Server from './server/server.mod';
-export { Server };
+
+import { IData, ISettings } from '../interfaces/ISettings';
+import FsProvider from '../../providers/generic/FsProvider';
+
+export const json = (sourcePath: string): ISettings => {
+    return JSON.parse(FsProvider.ReadFileSync(sourcePath).toString());
+};
+
+export const preload = (listToLoadFrom: Array<string>): Array<IData> => {
+    const loadedItems: Array<IData> = [];
+
+    for (const name in listToLoadFrom) {
+        loadedItems.push({
+            name: name,
+            data: FsProvider.ReadFileSync(listToLoadFrom[name]),
+        });
+    }
+
+    return loadedItems;
+};
+
 // MIT License
 // This file is a part of github.com/ricochhet/micro
 // Copyright (c) 2023 Jon

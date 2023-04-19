@@ -3,8 +3,8 @@
 
 import { ServerResponse } from 'http';
 import { IResponse, IDataResponse, IOpResponse } from '../interfaces/IResponse';
-import Logger from '../../../logger/Logger';
-import { LogType } from '../../../logger/enums/LogType';
+import Logger from '../../logger/Logger';
+import { LogType } from '../../logger/enums/LogType';
 
 declare module 'http' {
     interface ServerResponse extends IResponse {}
