@@ -38,8 +38,6 @@ import * as microsys_micro_cli_ts from './micro.cli';
 export { microsys_micro_cli_ts };
 import * as microsys_micro_mod_ts from './micro.mod';
 export { microsys_micro_mod_ts };
-import * as microsys_micro_unsafe_ts from './micro.unsafe';
-export { microsys_micro_unsafe_ts };
 import * as microsys_microsys_mod_ts from './microsys.mod';
 export { microsys_microsys_mod_ts };
 import * as microsys_mkdirmode_ts from './providers/enums/MkdirMode';
