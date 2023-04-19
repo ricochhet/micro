@@ -16,7 +16,6 @@ class CryptoUtils {
         }
         return true;
     }
-    ;
     static Compare = (a, b) => {
         const sa = String(a);
         const sb = String(b);
@@ -28,7 +27,6 @@ class CryptoUtils {
     static Sha256(data) {
         return crypto.createHash('sha256').update(data).digest('hex');
     }
-    ;
 }
 export default CryptoUtils;
 // MIT License
