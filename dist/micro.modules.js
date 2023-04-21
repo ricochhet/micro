@@ -1,9 +1,9 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
-import * as Logger from './modules/logger/Logger';
-import * as Tester from './modules/tester/tester.mod';
-import * as Server from './modules/server/server.mod';
-import * as Templater from './modules/templater/templater.mod';
+import Logger from './modules/logger/Logger';
+import Tester from './modules/tester/Tester';
+import Server from './modules/server/Server';
+import Templater from './modules/templater/Templater';
 export { Logger, Tester, Server, Templater };
 // MIT License
 // This file is a part of github.com/ricochhet/micro
