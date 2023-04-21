@@ -1,7 +1,9 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
 import FsProvider from './FsProvider';
-export { FsProvider };
+import { MkdirMode } from './enums/MkdirMode';
+import { SearchType } from './enums/SearchType';
+export { FsProvider, MkdirMode, SearchType };
 // MIT License
 // This file is a part of github.com/ricochhet/micro
 // Copyright (c) 2023 Jon
