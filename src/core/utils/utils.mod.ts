@@ -3,7 +3,9 @@
 
 import ArrayUtils from './ArrayUtils';
 import CommandUtils from './CommandUtils';
-export { ArrayUtils, CommandUtils };
+import CryptoUtils from './CryptoUtils';
+import WorkerUtils from './WorkerUtils';
+export { ArrayUtils, CommandUtils, CryptoUtils, WorkerUtils };
 
 // MIT License
 // This file is a part of github.com/ricochhet/micro
