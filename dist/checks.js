@@ -1,7 +1,7 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
 import { CheckFileCopyrights } from './core/tools/CheckFileCopyrights';
-import { GenerateTypescriptImports } from './core/tools/GenerateTypescriptImports';
+import { GenerateTypescriptImports } from './tools/GenerateTypescriptImports';
 CheckFileCopyrights('./src/', ['Copyright (c) 2023 Jon', 'MIT License', 'This file is a part of github.com/ricochhet/micro'], '.ts');
 GenerateTypescriptImports('./src/', './src/micro.auto.ts');
 // MIT License

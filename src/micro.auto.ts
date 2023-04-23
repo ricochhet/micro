@@ -37,10 +37,6 @@ import * as microsys_resolvers_mod_ts from './core/resolvers/resolvers.mod';
 export { microsys_resolvers_mod_ts };
 import * as microsys_checkfilecopyrights_ts from './core/tools/CheckFileCopyrights';
 export { microsys_checkfilecopyrights_ts };
-import * as microsys_generatetypescriptimports_ts from './core/tools/GenerateTypescriptImports';
-export { microsys_generatetypescriptimports_ts };
-import * as microsys_testercodeautogen_ts from './core/tools/TesterCodeAutoGen';
-export { microsys_testercodeautogen_ts };
 import * as microsys_tools_mod_ts from './core/tools/tools.mod';
 export { microsys_tools_mod_ts };
 import * as microsys_arrayutils_ts from './core/utils/ArrayUtils';
@@ -107,6 +103,10 @@ import * as microsys_iexpect_ts from './modules/tester/interfaces/IExpect';
 export { microsys_iexpect_ts };
 import * as microsys_tester_ts from './modules/tester/Tester';
 export { microsys_tester_ts };
+import * as microsys_generatetypescriptimports_ts from './tools/GenerateTypescriptImports';
+export { microsys_generatetypescriptimports_ts };
+import * as microsys_testercodeautogen_ts from './tools/TesterCodeAutoGen';
+export { microsys_testercodeautogen_ts };
 
 // MIT License
 // This file is a part of github.com/ricochhet/micro
