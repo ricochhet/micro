@@ -27,6 +27,9 @@ class CryptoUtils {
     static Sha256(data) {
         return crypto.createHash('sha256').update(data).digest('hex');
     }
+    static Md5(data) {
+        return crypto.createHash('md5').update(data).digest('hex');
+    }
 }
 export default CryptoUtils;
 // MIT License

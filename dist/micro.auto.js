@@ -41,6 +41,8 @@ import * as microsys_commandutils_ts from "./core/utils/CommandUtils";
 export { microsys_commandutils_ts };
 import * as microsys_cryptoutils_ts from "./core/utils/CryptoUtils";
 export { microsys_cryptoutils_ts };
+import * as microsys_stringutils_ts from "./core/utils/StringUtils";
+export { microsys_stringutils_ts };
 import * as microsys_utils_mod_ts from "./core/utils/utils.mod";
 export { microsys_utils_mod_ts };
 import * as microsys_workerutils_ts from "./core/utils/WorkerUtils";

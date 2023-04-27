@@ -1,42 +1,46 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
 
-import * as crypto from 'crypto';
-
-export default class CryptoUtils {
-    private static bufferEqual(a: Buffer, b: Buffer) {
-        if (a.length !== b.length) {
-            return false;
-        }
-
-        if (crypto.timingSafeEqual) {
-            return crypto.timingSafeEqual(a, b);
-        }
-
-        for (let i = 0; i < a.length; i++) {
-            if (a[i] !== b[i]) {
-                return false;
-            }
-        }
-        return true;
+export default class StringUtils {
+    public static capitalize(str: string): string {
+        return str.charAt(0).toUpperCase() + str.slice(1);
     }
 
-    public static Compare = (a: string, b: string): boolean => {
-        const sa: string = String(a);
-        const sb: string = String(b);
-        const key: Buffer = crypto.randomBytes(32);
-        const ah: Buffer = crypto.createHmac('sha256', key).update(sa).digest();
-        const bh: Buffer = crypto.createHmac('sha256', key).update(sb).digest();
-
-        return CryptoUtils.bufferEqual(ah, bh) && a === b;
-    };
-
-    public static Sha256(data: string) {
-        return crypto.createHash('sha256').update(data).digest('hex');
+    public static reverse(str: string): string {
+        return str.split('').reverse().join('');
     }
 
-    public static Md5(data: string) {
-        return crypto.createHash('md5').update(data).digest('hex');
+    public static truncate(str: string, maxLength: number): string {
+        if (str.length <= maxLength) {
+            return str;
+        } else {
+            return str.slice(0, maxLength) + '...';
+        }
+    }
+
+    public static isPalindrome(str: string): boolean {
+        const reversedStr = str.split('').reverse().join('');
+        return str === reversedStr;
+    }
+
+    public static countOccurrences(str: string, char: string): number {
+        return str.split(char).length - 1;
+    }
+
+    public static removeWhitespace(str: string): string {
+        return str.replace(/\s+/g, '');
+    }
+
+    public static startsWith(str: string, prefix: string): boolean {
+        return str.indexOf(prefix) === 0;
+    }
+
+    public static endsWith(str: string, suffix: string): boolean {
+        return str.indexOf(suffix, str.length - suffix.length) !== -1;
+    }
+
+    public static replaceAll(str: string, find: string, replace: string): string {
+        return str.replace(new RegExp(find, 'g'), replace);
     }
 }
 

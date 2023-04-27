@@ -1,45 +1,40 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
-
-import * as crypto from 'crypto';
-
-export default class CryptoUtils {
-    private static bufferEqual(a: Buffer, b: Buffer) {
-        if (a.length !== b.length) {
-            return false;
-        }
-
-        if (crypto.timingSafeEqual) {
-            return crypto.timingSafeEqual(a, b);
-        }
-
-        for (let i = 0; i < a.length; i++) {
-            if (a[i] !== b[i]) {
-                return false;
-            }
-        }
-        return true;
+export default class StringUtils {
+    static capitalize(str) {
+        return str.charAt(0).toUpperCase() + str.slice(1);
     }
-
-    public static Compare = (a: string, b: string): boolean => {
-        const sa: string = String(a);
-        const sb: string = String(b);
-        const key: Buffer = crypto.randomBytes(32);
-        const ah: Buffer = crypto.createHmac('sha256', key).update(sa).digest();
-        const bh: Buffer = crypto.createHmac('sha256', key).update(sb).digest();
-
-        return CryptoUtils.bufferEqual(ah, bh) && a === b;
-    };
-
-    public static Sha256(data: string) {
-        return crypto.createHash('sha256').update(data).digest('hex');
+    static reverse(str) {
+        return str.split('').reverse().join('');
     }
-
-    public static Md5(data: string) {
-        return crypto.createHash('md5').update(data).digest('hex');
+    static truncate(str, maxLength) {
+        if (str.length <= maxLength) {
+            return str;
+        }
+        else {
+            return str.slice(0, maxLength) + '...';
+        }
+    }
+    static isPalindrome(str) {
+        const reversedStr = str.split('').reverse().join('');
+        return str === reversedStr;
+    }
+    static countOccurrences(str, char) {
+        return str.split(char).length - 1;
+    }
+    static removeWhitespace(str) {
+        return str.replace(/\s+/g, '');
+    }
+    static startsWith(str, prefix) {
+        return str.indexOf(prefix) === 0;
+    }
+    static endsWith(str, suffix) {
+        return str.indexOf(suffix, str.length - suffix.length) !== -1;
+    }
+    static replaceAll(str, find, replace) {
+        return str.replace(new RegExp(find, 'g'), replace);
     }
 }
-
 // MIT License
 // This file is a part of github.com/ricochhet/micro
 // Copyright (c) 2023 Jon

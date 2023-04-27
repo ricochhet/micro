@@ -1,6 +1,48 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
 class ArrayUtils {
+    static sumArray(arr) {
+        return arr.reduce((acc, val) => acc + val, 0);
+    }
+    static flattenArray(arr) {
+        return arr.reduce((acc, val) => acc.concat(val), []);
+    }
+    static uniqueArray(arr) {
+        return [...new Set(arr)];
+    }
+    static lastItem(arr) {
+        return arr[arr.length - 1];
+    }
+    static shuffleArray(arr) {
+        const shuffled = [...arr];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        return shuffled;
+    }
+    static groupArrayBy(arr, key) {
+        return arr.reduce((acc, obj) => {
+            const groupKey = obj[key];
+            if (!acc[groupKey]) {
+                acc[groupKey] = [];
+            }
+            acc[groupKey].push(obj);
+            return acc;
+        }, {});
+    }
+    static sortBy(arr, key, ascending = true) {
+        const sortedArr = arr.sort((a, b) => {
+            if (a[key] < b[key]) {
+                return -1;
+            }
+            if (a[key] > b[key]) {
+                return 1;
+            }
+            return 0;
+        });
+        return ascending ? sortedArr : sortedArr.reverse();
+    }
     static Equals = (a, b) => {
         if (!b) {
             return false;
