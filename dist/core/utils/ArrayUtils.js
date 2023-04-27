@@ -43,7 +43,7 @@ class ArrayUtils {
         });
         return ascending ? sortedArr : sortedArr.reverse();
     }
-    static Equals = (a, b) => {
+    static equals = (a, b) => {
         if (!b) {
             return false;
         }
@@ -54,7 +54,7 @@ class ArrayUtils {
         }
         for (var i = 0, l = a.length; i < l; i++) {
             if (a[i] instanceof Array && b[i] instanceof Array) {
-                if (!ArrayUtils.Equals(a[i], b[i])) {
+                if (!ArrayUtils.equals(a[i], b[i])) {
                     return false;
                 }
             }

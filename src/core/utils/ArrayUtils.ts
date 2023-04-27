@@ -57,7 +57,7 @@ export default class ArrayUtils {
         return ascending ? sortedArr : sortedArr.reverse();
     }
 
-    public static Equals = (a: Array<any>, b: Array<any>): boolean => {
+    public static equals = (a: Array<any>, b: Array<any>): boolean => {
         if (!b) {
             return false;
         }
@@ -70,7 +70,7 @@ export default class ArrayUtils {
 
         for (var i = 0, l = a.length; i < l; i++) {
             if (a[i] instanceof Array && b[i] instanceof Array) {
-                if (!ArrayUtils.Equals(a[i], b[i])) {
+                if (!ArrayUtils.equals(a[i], b[i])) {
                     return false;
                 }
             } else if (a[i] != b[i]) {

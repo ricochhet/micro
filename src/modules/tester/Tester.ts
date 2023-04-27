@@ -54,7 +54,7 @@ export default class Tester {
             },
             toEqualValueAsArray(expected: T): string {
                 if (Array.isArray(actual) && Array.isArray(expected)) {
-                    if (ArrayUtils.Equals(actual, expected)) {
+                    if (ArrayUtils.equals(actual, expected)) {
                         return success(expected);
                     }
 

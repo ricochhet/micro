@@ -50,7 +50,7 @@ class Tester {
             },
             toEqualValueAsArray(expected) {
                 if (Array.isArray(actual) && Array.isArray(expected)) {
-                    if (ArrayUtils.Equals(actual, expected)) {
+                    if (ArrayUtils.equals(actual, expected)) {
                         return success(expected);
                     }
                     return failure(expected);
