@@ -1,7 +1,7 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
 import { Utils, Tools } from './micro.core';
-Utils.CommandUtils.do(['--check-file-copyrights'], (params) => {
+Utils.CommandUtils.add(['--check-file-copyrights'], (params) => {
     Tools.CheckFileCopyrights(params[1], params[2].split(','), params[3]);
 });
 // MIT License

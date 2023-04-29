@@ -1,6 +1,6 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
-class ArrayUtils {
+export default class ArrayUtils {
     static sumArray(arr) {
         return arr.reduce((acc, val) => acc + val, 0);
     }
@@ -43,7 +43,7 @@ class ArrayUtils {
         });
         return ascending ? sortedArr : sortedArr.reverse();
     }
-    static equals = (a, b) => {
+    static equals(a, b) {
         if (!b) {
             return false;
         }
@@ -63,9 +63,11 @@ class ArrayUtils {
             }
         }
         return true;
-    };
+    }
+    static isEqual(array, target) {
+        return target.every(i => array.includes(i));
+    }
 }
-export default ArrayUtils;
 // MIT License
 // This file is a part of github.com/ricochhet/micro
 // Copyright (c) 2023 Jon

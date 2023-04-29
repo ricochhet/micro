@@ -57,7 +57,7 @@ export default class ArrayUtils {
         return ascending ? sortedArr : sortedArr.reverse();
     }
 
-    public static equals = (a: Array<any>, b: Array<any>): boolean => {
+    public static equals(a: Array<any>, b: Array<any>): boolean {
         if (!b) {
             return false;
         }
@@ -79,7 +79,11 @@ export default class ArrayUtils {
         }
 
         return true;
-    };
+    }
+
+    public static isEqual(array: string[], target: string[]) {
+        return target.every(i => array.includes(i));
+    }
 }
 
 // MIT License

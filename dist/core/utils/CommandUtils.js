@@ -1,18 +1,16 @@
 // Copyright (c) 2023 Jon
 // See end of file for extended copyright information.
+import ArrayUtils from "./ArrayUtils";
 export default class CommandUtils {
-    static do(props, callback) {
+    static add(props, callback) {
         const params = process.argv.slice(2);
         if (!Array.isArray(props) || !props.length)
             return;
-        if (this.isEqual(params, props)) {
+        if (ArrayUtils.isEqual(params, props)) {
             if (typeof callback !== 'function')
                 return;
             callback(params, props);
         }
-    }
-    static isEqual(array, target) {
-        return target.every(i => array.includes(i));
     }
 }
 // MIT License
